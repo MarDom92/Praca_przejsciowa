@@ -27,10 +27,14 @@ private:
 
     QWidget *central = new QWidget(this);
 
+    Ui::Form uiList;
+
 #ifndef __ANDROID__
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
 #endif
 
+
+    void connectSliders();
 };
 
 #endif // MAINWINDOW_H
