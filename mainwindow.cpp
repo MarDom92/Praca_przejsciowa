@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
     horizontalLayout->addWidget(list);
     horizontalLayout->addWidget(chart->chartView);
 
+    //proporcja kolumn 2/7 do 5/7 rozmiaru okna
+    horizontalLayout->setStretch(0,2);
+    horizontalLayout->setStretch(1,5);
+
     //ustawienie glownego widgetu okna aplikacji
     central->setLayout(horizontalLayout);
     setCentralWidget(central);
