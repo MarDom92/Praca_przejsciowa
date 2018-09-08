@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets charts
 
 TARGET = Praca_przejsciowa
 TEMPLATE = app
@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    chart.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    chart.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
