@@ -17,7 +17,7 @@ Chart::~Chart()
 {
     delete series;
     delete chart;
-    delete  chartView;
+    delete chartView;
 }
 
 void Chart::createChart()

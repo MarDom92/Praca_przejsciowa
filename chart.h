@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCharts>
 
+
 class Chart : public QMainWindow
 {
     Q_OBJECT

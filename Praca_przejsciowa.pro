@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets charts
+QT       += core gui widgets charts uitools
 
 TARGET = Praca_przejsciowa
 TEMPLATE = app
@@ -35,3 +35,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    ui/list.ui
