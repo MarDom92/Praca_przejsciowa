@@ -3,14 +3,14 @@
 
 #include <QMainWindow>
 #include <QtCharts>
+#include "ui_list.h"
 
-
-class Chart : public QMainWindow
+class Chart : public QWidget
 {
     Q_OBJECT
 
 public:
-    Chart(QWidget *parent = nullptr);
+    Chart();
     ~Chart();
 
     void createChart();

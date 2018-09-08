@@ -3,15 +3,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    //wczytanie komponentu listy umozliwiajacego zmiane wartosci parametrow wykresu
-    QUiLoader loader;
-    QFile file("ui/list.ui");
-    file.open(QFile::ReadOnly);
-    list = loader.load(&file, this);
-    file.close();
-
-    //stworzenie czesci ui wyswietlajacej wykres
     chart->createChart();
+
+    //wczytanie komponentu listy umozliwiajacego zmiane wartosci parametrow wykresu
+    Ui::Form uiList;
+    uiList.setupUi(list);
 
     //rozny uklad elementow ui w zaleznosci od rodzaju systemu
 #ifdef __ANDROID__
@@ -22,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     horizontalLayout->addWidget(chart->chartView);
 
     //ustawienie glownego widgetu okna aplikacji
-    central.setLayout(horizontalLayout);
-    setCentralWidget(&central);
+    central->setLayout(horizontalLayout);
+    setCentralWidget(central);
 
     //minimalny i domyslny rozmiar okna aplikacji
     setMinimumSize(500, 500);
@@ -36,4 +32,5 @@ MainWindow::~MainWindow()
     delete chart;
     delete list;
     delete horizontalLayout;
+    delete central;
 }

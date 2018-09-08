@@ -1,7 +1,6 @@
 #include "chart.h"
 
-Chart::Chart(QWidget *parent)
-    : QMainWindow(parent)
+Chart::Chart()
 {
     series->append(0, 6);
     series->append(2, 4);

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets charts uitools
+QT       += core gui widgets charts
 
 TARGET = Praca_przejsciowa
 TEMPLATE = app

@@ -2,14 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QUiLoader>
+//#include <QUiLoader>
+
+#include "ui_list.h"
 
 #ifndef __ANDROID__
 #include <QHBoxLayout>
 #endif
 
 #include "chart.h"
-
 
 class MainWindow : public QMainWindow
 {
@@ -20,11 +21,11 @@ public:
     ~MainWindow();
 
 private:
-    Chart *chart = new Chart(this);
+    Chart *chart = new Chart();
 
     QWidget *list = new QWidget(this);
 
-    QWidget central;
+    QWidget *central = new QWidget(this);
 
 #ifndef __ANDROID__
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
