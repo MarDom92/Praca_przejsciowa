@@ -30,6 +30,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     connectSliders();
 #endif
+
+    //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
+    calculations.setDataValues(
+                uiList.horizontalSlider_gasPressure->value(),
+                uiList.horizontalSlider_massPiston->value(),
+                uiList.horizontalSlider_massCrankPin->value(),
+                uiList.horizontalSlider_massConnectingRod->value(),
+                uiList.horizontalSlider_d->value(),
+                uiList.horizontalSlider_r->value(), uiList.
+                horizontalSlider_l->value(), uiList.
+                horizontalSlider_n->value()
+                );
+
+    //obliczenia sily cisnienia gazow
+    calculations.calculate_gasPressureForce();
+
+    //obliczenia sily bezwladnosci
+    calculations.calculate_inertialForce();
 }
 
 MainWindow::~MainWindow()

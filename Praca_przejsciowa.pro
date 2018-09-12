@@ -25,11 +25,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    chart.cpp
+    chart.cpp \
+    calculations.cpp
 
 HEADERS += \
         mainwindow.h \
-    chart.h
+    chart.h \
+    calculations.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

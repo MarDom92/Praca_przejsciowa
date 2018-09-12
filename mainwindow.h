@@ -2,15 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-//#include <QUiLoader>
 
 #include "ui_list.h"
+#include "chart.h"
+#include "calculations.h"
 
 #ifndef __ANDROID__
 #include <QHBoxLayout>
 #endif
 
-#include "chart.h"
 
 class MainWindow : public QMainWindow
 {
@@ -29,12 +29,14 @@ private:
 
     Ui::Form uiList;
 
+    Calculations calculations;
+
 #ifndef __ANDROID__
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
 #endif
 
-
     void connectSliders();
+
 };
 
 #endif // MAINWINDOW_H

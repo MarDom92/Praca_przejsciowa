@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QtCharts>
+
 #include "ui_list.h"
+
 
 class Chart : public QWidget
 {
