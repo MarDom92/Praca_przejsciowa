@@ -39,7 +39,7 @@ private:
     //srednica cylindra, promien wykorbienia, dlugosc tloka [m]
     float d, r, l;
 
-    //stosunek r do l [-]
+    //wspolczynnik korbowodu - stosunek r do l [-]
     float lambda;
 
     //predkosc obrotowa walu korbowego [obr/min]
