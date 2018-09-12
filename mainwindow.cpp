@@ -52,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     //obliczenia sily wypadkowej dzialajacej na tlok
     calculations.calculate_pistonForce();
 
+    calculations.calculate_beta();
+
     calculations.updateChart();
 }
 

@@ -2,10 +2,16 @@
 
 Calculations::Calculations()
 {
+    cout << "konstruktor poczatek" << endl;
     for(int i=0; i<=360; i++)
     {
         alfa[i] = i * M_PI / 180;
     }
+    for(int i=0; i<=360; i++)
+    {
+        cout << i << " alfa[i]=" << alfa[i] << endl;
+    }
+    cout << "konstruktor koniec" << endl;
 }
 
 //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
@@ -22,8 +28,8 @@ void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPist
     this->n = n;        //[obr/min]
 
     //uklad dwoch mas zastepczych skupionych w srodku sworznia tlokowego oraz czopa korbowego
-    massReciprocatingMotion = float(massPiston + 0.25 * massConnectingRod);     //[kg]
-    massRotationalMotion = float(massCrankPin + 0.75 * massConnectingRod);      //[kg]
+    massReciprocatingMotion = massPiston + 0.25 * massConnectingRod;     //[kg]
+    massRotationalMotion = massCrankPin + 0.75 * massConnectingRod;      //[kg]
 
     lambda = r / l;             //[m]
     omega = M_PI * n / 30;      //konwersja [obr/min] -> [1/s]
@@ -62,10 +68,21 @@ void Calculations::calculate_pistonForce()
     }
 }
 
+//obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
+void Calculations::calculate_beta()
+{
+    for(int i=0; i<=360; i++)
+    {
+        //wzor z zaleznosci geometrycznych
+        beta[i] = abs(asin(r * sin(alfa[i]) / l));
+    }
+}
+
 void Calculations::updateChart()
 {
     for(int i=0; i<=360; i++)
     {
         cout << i << " alfa[i]=" << alfa[i] << " gasPressureForce=" << gasPressureForce[i] << " inertialForce=" << inertialForce[i] << " pistonForce=" << pistonForce[i] << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " beta=" << beta[i] << endl;
     }
 }

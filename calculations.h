@@ -20,6 +20,8 @@ public:
 
     void calculate_pistonForce();
 
+    void calculate_beta();
+
     void updateChart();
 
 private:
@@ -45,10 +47,13 @@ private:
     float lambda;
 
     //predkosc obrotowa walu korbowego [obr/min]
-    float n;
+    float n, a;
 
     //predkosc katowa walu korbowego [1/s]
     float omega;
+
+    //tablica katow pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
+    float beta[361];
 
     //sila cisnienia gazu w cylindrze
     float gasPressureForce[361];
