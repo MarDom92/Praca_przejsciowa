@@ -48,6 +48,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     //obliczenia sily bezwladnosci
     calculations.calculate_inertialForce();
+
+    //obliczenia sily wypadkowej dzialajacej na tlok
+    calculations.calculate_pistonForce();
+
+    calculations.updateChart();
 }
 
 MainWindow::~MainWindow()

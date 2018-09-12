@@ -5,7 +5,6 @@ Calculations::Calculations()
     for(int i=0; i<=360; i++)
     {
         alfa[i] = i * M_PI / 180;
-        cout << "alfa[i]=" << alfa[i] << endl;
     }
 }
 
@@ -36,7 +35,6 @@ void Calculations::calculate_gasPressureForce()
     for(int i=0; i<=360; i++)
     {
         gasPressureForce[i] = M_PI * d * d / 4 * (gasPressure - atmosphericPressure);
-        cout << "gasPressureForce=" << gasPressureForce[i] << endl;
     }
 }
 
@@ -45,18 +43,29 @@ void Calculations::calculate_inertialForce()
 {
     for(int i=0; i<=360; i++)
     {
-        //suma sil bezwladnosci pierwszego i drugiego rzedu w ruchu posuwisto-zwrotnym
+        //sila bezwladnosci w ruchu posuwisto-zwrotnym - suma sil bezwladnosci pierwszego i drugiego rzedu
         reciprocatingInertialForce[i] = massReciprocatingMotion * omega * omega * (cos(alfa[i]) + lambda * cos(2 * alfa[i]));
         //sila bezwladnosci w ruchu obrotowym
         rotationalInertialForce[i] = massRotationalMotion * r * omega * omega;
         //calkowita sila bezwladnosci
         inertialForce[i] = reciprocatingInertialForce[i] + rotationalInertialForce[i];
+    }
+}
 
-        cout << "inertialForce=" << inertialForce[i] << endl;
+//obliczenia sily wypadkowej dzialajacej na tlok
+void Calculations::calculate_pistonForce()
+{
+    for(int i=0; i<=360; i++)
+    {
+        //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym
+        pistonForce[i] = gasPressureForce[i] + reciprocatingInertialForce[i];
     }
 }
 
 void Calculations::updateChart()
 {
-
+    for(int i=0; i<=360; i++)
+    {
+        cout << i << " alfa[i]=" << alfa[i] << " gasPressureForce=" << gasPressureForce[i] << " inertialForce=" << inertialForce[i] << " pistonForce=" << pistonForce[i] << endl;
+    }
 }

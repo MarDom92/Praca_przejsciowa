@@ -18,6 +18,8 @@ public:
 
     void calculate_inertialForce();
 
+    void calculate_pistonForce();
+
     void updateChart();
 
 private:
@@ -54,6 +56,8 @@ private:
     //sila bezwladnosci ruchu posuwisto-zwrotnego, sila bezwladnosci ruchu obrotowego, calkowita sila bezwladnosci
     float reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
 
+    //sila wypadkowa dzialajaca na tlok
+    float pistonForce[361];
 
 };
 
