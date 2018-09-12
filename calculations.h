@@ -48,8 +48,13 @@ private:
     //predkosc katowa walu korbowego [1/s]
     float omega;
 
-    //sila cisnienia gazu w cylindrze, sila bezwladnosci ruchu posuwisto-zwrotnego, sila bezwladnosci ruchu obrotowego
-    float gasPressureForce[361], reciprocalInertialForce[361], rotationalInertialForce[361], inertialForce[361];
+    //sila cisnienia gazu w cylindrze
+    float gasPressureForce[361];
+
+    //sila bezwladnosci ruchu posuwisto-zwrotnego, sila bezwladnosci ruchu obrotowego, calkowita sila bezwladnosci
+    float reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
+
+
 };
 
 #endif // CALCULATIONS_H

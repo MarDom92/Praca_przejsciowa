@@ -46,11 +46,11 @@ void Calculations::calculate_inertialForce()
     for(int i=0; i<=360; i++)
     {
         //suma sil bezwladnosci pierwszego i drugiego rzedu w ruchu posuwisto-zwrotnym
-        reciprocalInertialForce[i] = massReciprocatingMotion * omega * omega * (cos(alfa[i]) + lambda * cos(2 * alfa[i]));
+        reciprocatingInertialForce[i] = massReciprocatingMotion * omega * omega * (cos(alfa[i]) + lambda * cos(2 * alfa[i]));
         //sila bezwladnosci w ruchu obrotowym
         rotationalInertialForce[i] = massRotationalMotion * r * omega * omega;
         //calkowita sila bezwladnosci
-        inertialForce[i] = reciprocalInertialForce[i] + rotationalInertialForce[i];
+        inertialForce[i] = reciprocatingInertialForce[i] + rotationalInertialForce[i];
 
         cout << "inertialForce=" << inertialForce[i] << endl;
     }
