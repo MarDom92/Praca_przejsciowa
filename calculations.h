@@ -12,7 +12,7 @@ public:
     Calculations();
 
     void setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin,
-                       unsigned int massConnectingRod, float d, float r, float l, float n);
+                       unsigned int massConnectingRod, double d, double r, double l, double n);
 
     void calculate_gasPressureForce();
 
@@ -29,7 +29,7 @@ private:
     const unsigned int atmosphericPressure = 100000;
 
     //tablica katow od 0 do 360 stopni [rad]
-    float alfa[361];
+    double alfa[361];
 
     //cisnienie gazu [Pa]
     unsigned int gasPressure;
@@ -38,31 +38,31 @@ private:
     unsigned int massPiston, massCrankPin, massConnectingRod;
 
     //masa wykonujaca ruch postepowy, masa wykonujaca ruch obrotowy [kg]
-    float massReciprocatingMotion, massRotationalMotion;
+    double massReciprocatingMotion, massRotationalMotion;
 
     //srednica cylindra, promien wykorbienia, dlugosc tloka [m]
-    float d, r, l;
+    double d, r, l;
 
     //wspolczynnik korbowodu - stosunek r do l [-]
-    float lambda;
+    double lambda;
 
     //predkosc obrotowa walu korbowego [obr/min]
-    float n, a;
+    double n, a;
 
     //predkosc katowa walu korbowego [1/s]
-    float omega;
+    double omega;
 
     //tablica katow pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    float beta[361];
+    double beta[361];
 
     //sila cisnienia gazu w cylindrze
-    float gasPressureForce[361];
+    double gasPressureForce[361];
 
     //sila bezwladnosci ruchu posuwisto-zwrotnego, sila bezwladnosci ruchu obrotowego, calkowita sila bezwladnosci
-    float reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
+    double reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
 
     //sila wypadkowa dzialajaca na tlok
-    float pistonForce[361];
+    double pistonForce[361];
 
 };
 

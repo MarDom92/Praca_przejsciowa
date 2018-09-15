@@ -15,7 +15,7 @@ Calculations::Calculations()
 }
 
 //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
-void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin, unsigned int massConnectingRod, float d, float r, float l, float n)
+void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin, unsigned int massConnectingRod, double d, double r, double l, double n)
 {
     this->gasPressure = gasPressure * 1000;                     //konwersja [kPa] -> [Pa]
     this->massPiston = massPiston * 0.001;                      //konwersja [g]   -> [kg]
