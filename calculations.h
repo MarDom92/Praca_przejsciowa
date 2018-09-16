@@ -33,19 +33,19 @@ public:
     void updateChart();
 
 private:
-    //stale cisneinei atmosferyczne [Pa]
+    //stale cisneinei atmosferyczne P_atm [Pa]
     const unsigned int atmosphericPressure = 100000;
 
     //tablica katow od 0 do 360 stopni [rad]
     double alfa[361];
 
-    //cisnienie gazu [Pa]
+    //cisnienie gazu [Pa] p_g
     unsigned int gasPressure;
 
-    //masa tloka, masa czopu korbowego, masa korbowodu [kg]
+    //masa tloka m_t, masa czopu korbowego m_w, masa korbowodu m_k [kg]
     unsigned int massPiston, massCrankPin, massConnectingRod;
 
-    //masa wykonujaca ruch postepowy, masa wykonujaca ruch obrotowy [kg]
+    //masa wykonujaca ruch postepowy m_p, masa wykonujaca ruch obrotowy m_o [kg]
     double massReciprocatingMotion, massRotationalMotion;
 
     //srednica cylindra, promien wykorbienia, dlugosc tloka [m]
@@ -63,25 +63,25 @@ private:
     //tablica katow pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
     double beta[361];
 
-    //sila cisnienia gazu w cylindrze
+    //sila cisnienia gazu w cylindrze F_g
     double gasPressureForce[361];
 
-    //sila bezwladnosci ruchu posuwisto-zwrotnego, sila bezwladnosci ruchu obrotowego, calkowita sila bezwladnosci
+    //sila bezwladnosci ruchu posuwisto-zwrotnego P_p, sila bezwladnosci ruchu obrotowego P_o, calkowita sila bezwladnosci F_b
     double reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
 
-    //sila wypadkowa dzialajaca na tlok
+    //sila wypadkowa dzialajaca na tlok P_t
     double pistonForce[361];
 
-    //skladowa prostopadla do osi cylindra sily dzialajacej na tlok
+    //skladowa prostopadla do osi cylindra sily dzialajacej na tlok N
     double pistonForce_N[361];
 
-    //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok
+    //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok P_k
     double pistonForce_Pk[361];
 
-    //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok
+    //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
     double pistonForce_Pk_tangencial[361];
 
-    //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok
+    //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R
     double pistonForce_Pk_centripetal[361];
 };
 

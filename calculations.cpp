@@ -35,7 +35,7 @@ void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPist
     omega = M_PI * n / 30;      //konwersja [obr/min] -> [1/s]
 }
 
-//obliczenia sily cisnienia gazow
+//obliczenia sily cisnienia gazow F_g
 void Calculations::calculate_gasPressureForce()
 {
     for(int i=0; i<=360; i++)
@@ -44,16 +44,16 @@ void Calculations::calculate_gasPressureForce()
     }
 }
 
-//obliczenia sily bezwladnosci
+//obliczenia sily bezwladnosci F_b
 void Calculations::calculate_inertialForce()
 {
     for(int i=0; i<=360; i++)
     {
-        //sila bezwladnosci w ruchu posuwisto-zwrotnym - suma sil bezwladnosci pierwszego i drugiego rzedu
+        //sila bezwladnosci w ruchu posuwisto-zwrotnym - suma sil bezwladnosci pierwszego i drugiego rzedu P_p = P_p' + P_p''
         reciprocatingInertialForce[i] = massReciprocatingMotion * omega * omega * (cos(alfa[i]) + lambda * cos(2 * alfa[i]));
-        //sila bezwladnosci w ruchu obrotowym
+        //sila bezwladnosci w ruchu obrotowym P_o
         rotationalInertialForce[i] = massRotationalMotion * r * omega * omega;
-        //calkowita sila bezwladnosci
+        //calkowita sila bezwladnosci F_b = P_p + P_o
         inertialForce[i] = reciprocatingInertialForce[i] + rotationalInertialForce[i];
     }
 }
@@ -68,17 +68,17 @@ void Calculations::calculate_beta()
     }
 }
 
-//obliczenia sily wypadkowej dzialajacej na tlok
+//obliczenia sily wypadkowej dzialajacej na tlok P_t
 void Calculations::calculate_pistonForce()
 {
     for(int i=0; i<=360; i++)
     {
-        //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym
+        //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym P_t = F_g + P_p
         pistonForce[i] = gasPressureForce[i] + reciprocatingInertialForce[i];
     }
 }
 
-//obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok
+//obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok N
 void Calculations::calculate_pistonForce_N()
 {
     for(int i=0; i<=360; i++)
@@ -87,7 +87,7 @@ void Calculations::calculate_pistonForce_N()
     }
 }
 
-//obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok
+//obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok P_k
 void Calculations::calculate_pistonForce_Pk()
 {
     for(int i=0; i<=360; i++)
@@ -96,7 +96,7 @@ void Calculations::calculate_pistonForce_Pk()
     }
 }
 
-//obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok
+//obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
 void Calculations::calculate_pistonForce_Pk_tangencial()
 {
     for(int i=0; i<=360; i++)
@@ -105,7 +105,7 @@ void Calculations::calculate_pistonForce_Pk_tangencial()
     }
 }
 
-//obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok
+//obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok R
 void Calculations::calculate_pistonForce_Pk_centripetal()
 {
     for(int i=0; i<=360; i++)
