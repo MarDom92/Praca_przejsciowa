@@ -58,6 +58,15 @@ void Calculations::calculate_inertialForce()
     }
 }
 
+//obliczenia odleglosci miedzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego) h
+void Calculations::calculate_h()
+{
+    for(int i=0; i<=360; i++)
+    {
+        h[i] = r * cos(alfa[i]) + l * cos(beta[i]);
+    }
+}
+
 //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
 void Calculations::calculate_beta()
 {
@@ -114,12 +123,23 @@ void Calculations::calculate_pistonForce_Pk_centripetal()
     }
 }
 
-//obliczenia chwilowego momentu obrotowego na wale korbowym
+//obliczenia chwilowego momentu obrotowego na wale korbowym M
 void Calculations::calculate_torqueCrankshaft()
 {
     for(int i=0; i<=360; i++)
     {
         torqueCrankshaft[i] = pistonForce_Pk_tangencial[i] * r;
+    }
+}
+
+//obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
+void Calculations::calculate_torqueReactive()
+{
+    for(int i=0; i<=360; i++)
+    {
+        //h to odleglosc miedzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego)
+        torqueReactive[i] = pistonForce_N[i] * h[i];
+        abc[i] = pistonForce_Pk[i] * h[i] * sin(beta[i]);
     }
 }
 
@@ -133,6 +153,7 @@ void Calculations::updateChart()
         cout << i << " alfa[i]=" << alfa[i] << " pistonForce[i]=" << pistonForce[i] << " pistonForce_N[i]=" << pistonForce_N[i] << " pistonForce_Pk[i]=" << pistonForce_Pk[i] << endl;
         cout << i << " alfa[i]=" << alfa[i] << " alfa[i] + beta[i]=" << alfa[i] + beta[i] << " sin(alfa[i] + beta[i])=" << sin(alfa[i] + beta[i]) << endl;
         cout << i << " alfa[i]=" << alfa[i] << " pistonForce_Pk_tangencial[i]=" << pistonForce_Pk_tangencial[i] << " pistonForce_Pk_centripetal[i]=" << pistonForce_Pk_centripetal[i] << endl;
-        cout << i << " alfa[i]=" << alfa[i] << " torqueCrankshaft[i]=" << torqueCrankshaft[i] << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " torqueCrankshaft[i]=" << torqueCrankshaft[i] << " h[i]=" << h[i] << " torqueReactive[i]=" << torqueReactive[i] <<endl;
+        cout << i << " alfa[i]=" << alfa[i] << " abc[i]=" << abc[i] << endl;
     }
 }

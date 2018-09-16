@@ -38,21 +38,43 @@ MainWindow::MainWindow(QWidget *parent)
                 uiList.horizontalSlider_massCrankPin->value(),
                 uiList.horizontalSlider_massConnectingRod->value(),
                 uiList.horizontalSlider_d->value(),
-                uiList.horizontalSlider_r->value(), uiList.
-                horizontalSlider_l->value(), uiList.
-                horizontalSlider_n->value()
+                uiList.horizontalSlider_r->value(),
+                uiList.horizontalSlider_l->value(),
+                uiList.horizontalSlider_n->value()
                 );
 
-    //obliczenia sily cisnienia gazow
+    //obliczenia sily cisnienia gazow F_g
     calculations.calculate_gasPressureForce();
 
-    //obliczenia sily bezwladnosci
+    //obliczenia sily bezwladnosci F_b
     calculations.calculate_inertialForce();
 
-    //obliczenia sily wypadkowej dzialajacej na tlok
+    //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
+    calculations.calculate_h();
+
+    //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
+    calculations.calculate_beta();
+
+    //obliczenia sily wypadkowej dzialajacej na tlok P_t
     calculations.calculate_pistonForce();
 
-    calculations.calculate_beta();
+    //obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok N
+    calculations.calculate_pistonForce_N();
+
+    //obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok P_k
+    calculations.calculate_pistonForce_Pk();
+
+    //obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
+    calculations.calculate_pistonForce_Pk_tangencial();
+
+    //obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok R
+    calculations.calculate_pistonForce_Pk_centripetal();
+
+    //obliczenia chwilowego momentu obrotowego na wale korbowym M
+    calculations.calculate_torqueCrankshaft();
+
+    //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
+    calculations.calculate_torqueReactive();
 
     calculations.updateChart();
 }
