@@ -79,34 +79,34 @@ private:
     //tablica katow pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
     double beta[361];
 
-    //sila cisnienia gazu w cylindrze F_g
+    //sila cisnienia gazu w cylindrze F_g [N]
     double gasPressureForce[361];
 
-    //sila bezwladnosci ruchu posuwisto-zwrotnego P_p, sila bezwladnosci ruchu obrotowego P_o, calkowita sila bezwladnosci F_b
+    //sila bezwladnosci ruchu posuwisto-zwrotnego P_p, sila bezwladnosci ruchu obrotowego P_o, calkowita sila bezwladnosci F_b [N]
     double reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
 
-    //sila wypadkowa dzialajaca na tlok P_t
+    //sila wypadkowa dzialajaca na tlok P_t [N]
     double pistonForce[361];
 
-    //skladowa prostopadla do osi cylindra sily dzialajacej na tlok N
+    //skladowa prostopadla do osi cylindra sily dzialajacej na tlok N [N]
     double pistonForce_N[361];
 
-    //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok P_k
+    //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok P_k [N]
     double pistonForce_Pk[361];
 
-    //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
+    //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T [N]
     double pistonForce_Pk_tangencial[361];
 
-    //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R
+    //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R [N]
     double pistonForce_Pk_centripetal[361];
 
-    //chwilowy moment obrotowy na wale korbowym M
+    //chwilowy moment obrotowy na wale korbowym M [Nm]
     double torqueCrankshaft[361];
 
-    //moment M_Pk
+    //moment M_Pk [Nm]
     double torque_Pk[361];
 
-    //moment reakcyjny dzialajacy na kadlub silnika M_r
+    //moment reakcyjny dzialajacy na kadlub silnika M_r [Nm]
     double torqueReactive[361];
 };
 
