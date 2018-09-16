@@ -55,6 +55,9 @@ MainWindow::MainWindow(QWidget *parent)
     //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
     calculations.calculate_beta();
 
+    //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
+    calculations.calculate_a();
+
     //obliczenia sily wypadkowej dzialajacej na tlok P_t
     calculations.calculate_pistonForce();
 
@@ -72,6 +75,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //obliczenia chwilowego momentu obrotowego na wale korbowym M
     calculations.calculate_torqueCrankshaft();
+
+    //obliczenia momentu od sily P_k na ramieniu a
+    calculations.calculate_torque_Pk();
 
     //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
     calculations.calculate_torqueReactive();

@@ -22,6 +22,8 @@ public:
 
     void calculate_beta();
 
+    void calculate_a();
+
     void calculate_pistonForce();
 
     void calculate_pistonForce_N();
@@ -33,6 +35,8 @@ public:
     void calculate_pistonForce_Pk_centripetal();
 
     void calculate_torqueCrankshaft();
+
+    void calculate_torque_Pk();
 
     void calculate_torqueReactive();
 
@@ -59,6 +63,9 @@ private:
 
     //h to odleglosc midzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego) [m]
     double h[361];
+
+    //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B [m]
+    double a[361];
 
     //wspolczynnik korbowodu - stosunek r do l [-]
     double lambda;
@@ -95,6 +102,9 @@ private:
 
     //chwilowy moment obrotowy na wale korbowym M
     double torqueCrankshaft[361];
+
+    //moment M_Pk
+    double torque_Pk[361];
 
     //moment reakcyjny dzialajacy na kadlub silnika M_r
     double torqueReactive[361];

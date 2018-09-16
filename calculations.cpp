@@ -77,6 +77,15 @@ void Calculations::calculate_beta()
     }
 }
 
+//obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
+void Calculations::calculate_a()
+{
+    for(int i=0; i<=360; i++)
+    {
+        a[i] = h[i] * sin(beta[i]);
+    }
+}
+
 //obliczenia sily wypadkowej dzialajacej na tlok P_t
 void Calculations::calculate_pistonForce()
 {
@@ -132,6 +141,16 @@ void Calculations::calculate_torqueCrankshaft()
     }
 }
 
+//obliczenia momentu od sily P_k na ramieniu a
+void Calculations::calculate_torque_Pk()
+{
+    for(int i=0; i<=360; i++)
+    {
+        //a to odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
+        torque_Pk[i] = pistonForce_Pk[i] * a[i];
+    }
+}
+
 //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
 void Calculations::calculate_torqueReactive()
 {
@@ -153,5 +172,6 @@ void Calculations::updateChart()
         cout << i << " alfa[i]=" << alfa[i] << " alfa[i] + beta[i]=" << alfa[i] + beta[i] << " sin(alfa[i] + beta[i])=" << sin(alfa[i] + beta[i]) << endl;
         cout << i << " alfa[i]=" << alfa[i] << " pistonForce_Pk_tangencial[i]=" << pistonForce_Pk_tangencial[i] << " pistonForce_Pk_centripetal[i]=" << pistonForce_Pk_centripetal[i] << endl;
         cout << i << " alfa[i]=" << alfa[i] << " torqueCrankshaft[i]=" << torqueCrankshaft[i] << " h[i]=" << h[i] << " torqueReactive[i]=" << torqueReactive[i] <<endl;
+        cout << i << " alfa[i]=" << alfa[i] << " a[i]=" << a[i] << " torque_Pk[i]=" << torque_Pk[i] << endl;
     }
 }
