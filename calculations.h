@@ -30,6 +30,8 @@ public:
 
     void calculate_pistonForce_Pk_centripetal();
 
+    void calculate_torqueCrankshaft();
+
     void updateChart();
 
 private:
@@ -83,6 +85,9 @@ private:
 
     //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R
     double pistonForce_Pk_centripetal[361];
+
+    //chwilowy moment obrotowy na wale korbowym
+    double torqueCrankshaft[361];
 };
 
 #endif // CALCULATIONS_H

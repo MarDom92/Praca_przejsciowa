@@ -114,6 +114,15 @@ void Calculations::calculate_pistonForce_Pk_centripetal()
     }
 }
 
+//obliczenia chwilowego momentu obrotowego na wale korbowym
+void Calculations::calculate_torqueCrankshaft()
+{
+    for(int i=0; i<=360; i++)
+    {
+        torqueCrankshaft[i] = pistonForce_Pk_tangencial[i] * r;
+    }
+}
+
 void Calculations::updateChart()
 {
     for(int i=0; i<=360; i++)
@@ -124,5 +133,6 @@ void Calculations::updateChart()
         cout << i << " alfa[i]=" << alfa[i] << " pistonForce[i]=" << pistonForce[i] << " pistonForce_N[i]=" << pistonForce_N[i] << " pistonForce_Pk[i]=" << pistonForce_Pk[i] << endl;
         cout << i << " alfa[i]=" << alfa[i] << " alfa[i] + beta[i]=" << alfa[i] + beta[i] << " sin(alfa[i] + beta[i])=" << sin(alfa[i] + beta[i]) << endl;
         cout << i << " alfa[i]=" << alfa[i] << " pistonForce_Pk_tangencial[i]=" << pistonForce_Pk_tangencial[i] << " pistonForce_Pk_centripetal[i]=" << pistonForce_Pk_centripetal[i] << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " torqueCrankshaft[i]=" << torqueCrankshaft[i] << endl;
     }
 }
