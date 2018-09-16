@@ -18,6 +18,8 @@ public:
 
     void calculate_inertialForce();
 
+    void calculate_h();
+
     void calculate_beta();
 
     void calculate_pistonForce();
@@ -31,6 +33,8 @@ public:
     void calculate_pistonForce_Pk_centripetal();
 
     void calculate_torqueCrankshaft();
+
+    void calculate_torqueReactive();
 
     void updateChart();
 
@@ -53,11 +57,14 @@ private:
     //srednica cylindra, promien wykorbienia, dlugosc tloka [m]
     double d, r, l;
 
+    //h to odleglosc midzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego) [m]
+    double h[361];
+
     //wspolczynnik korbowodu - stosunek r do l [-]
     double lambda;
 
     //predkosc obrotowa walu korbowego [obr/min]
-    double n, a;
+    double n;
 
     //predkosc katowa walu korbowego [1/s]
     double omega;
@@ -86,8 +93,11 @@ private:
     //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R
     double pistonForce_Pk_centripetal[361];
 
-    //chwilowy moment obrotowy na wale korbowym
+    //chwilowy moment obrotowy na wale korbowym M
     double torqueCrankshaft[361];
+
+    //moment reakcyjny dzialajacy na kadlub silnika M_r
+    double torqueReactive[361];
 };
 
 #endif // CALCULATIONS_H
