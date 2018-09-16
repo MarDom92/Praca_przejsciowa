@@ -83,6 +83,9 @@ MainWindow::MainWindow(QWidget *parent)
     calculations.calculate_torqueReactive();
 
     calculations.updateChart();
+
+    double a = calculations.get_gasPressureForce();
+    cout << endl << "a=" << a << endl;
 }
 
 MainWindow::~MainWindow()

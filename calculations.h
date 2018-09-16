@@ -2,9 +2,9 @@
 #define CALCULATIONS_H
 
 #include <cmath>
-
 #include <iostream>
 using namespace std;
+
 
 class Calculations
 {
@@ -15,30 +15,32 @@ public:
                        unsigned int massConnectingRod, double d, double r, double l, double n);
 
     void calculate_gasPressureForce();
-
     void calculate_inertialForce();
-
     void calculate_h();
-
     void calculate_beta();
-
     void calculate_a();
-
     void calculate_pistonForce();
-
     void calculate_pistonForce_N();
-
     void calculate_pistonForce_Pk();
-
     void calculate_pistonForce_Pk_tangencial();
-
     void calculate_pistonForce_Pk_centripetal();
-
     void calculate_torqueCrankshaft();
-
     void calculate_torque_Pk();
-
     void calculate_torqueReactive();
+
+    double get_gasPressureForce();
+    double get_inertialForce();
+    double get_h();
+    double get_beta();
+    double get_a();
+    double get_pistonForce();
+    double get_pistonForce_N();
+    double get_pistonForce_Pk();
+    double get_pistonForce_Pk_tangencial();
+    double get_pistonForce_Pk_centripetal();
+    double get_torqueCrankshaft();
+    double get_torque_Pk();
+    double get_torqueReactive();
 
     void updateChart();
 

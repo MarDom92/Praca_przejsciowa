@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include <QtCharts>
 
-#include "ui_list.h"
-
 
 class Chart : public QWidget
 {
@@ -18,9 +16,12 @@ public:
     void createChart();
 
 private:
-    QLineSeries *series = new QLineSeries();
+//    QLineSeries *series = new QLineSeries();
 
     QChart *chart = new QChart();
+
+    //przykladowy obiekt klasy Series
+//    Series *s = new Series();
 
 public:
     QChartView *chartView = new QChartView(chart);
