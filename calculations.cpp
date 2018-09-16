@@ -58,16 +58,6 @@ void Calculations::calculate_inertialForce()
     }
 }
 
-//obliczenia sily wypadkowej dzialajacej na tlok
-void Calculations::calculate_pistonForce()
-{
-    for(int i=0; i<=360; i++)
-    {
-        //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym
-        pistonForce[i] = gasPressureForce[i] + reciprocatingInertialForce[i];
-    }
-}
-
 //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
 void Calculations::calculate_beta()
 {
@@ -78,11 +68,61 @@ void Calculations::calculate_beta()
     }
 }
 
+//obliczenia sily wypadkowej dzialajacej na tlok
+void Calculations::calculate_pistonForce()
+{
+    for(int i=0; i<=360; i++)
+    {
+        //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym
+        pistonForce[i] = gasPressureForce[i] + reciprocatingInertialForce[i];
+    }
+}
+
+//obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok
+void Calculations::calculate_pistonForce_N()
+{
+    for(int i=0; i<=360; i++)
+    {
+        pistonForce_N[i] = pistonForce[i] * tan(beta[i]);
+    }
+}
+
+//obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok
+void Calculations::calculate_pistonForce_Pk()
+{
+    for(int i=0; i<=360; i++)
+    {
+        pistonForce_Pk[i] = pistonForce[i] / cos(beta[i]);
+    }
+}
+
+//obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok
+void Calculations::calculate_pistonForce_Pk_tangencial()
+{
+    for(int i=0; i<=360; i++)
+    {
+        pistonForce_Pk_tangencial[i] = pistonForce_Pk[i] * sin(alfa[i] + beta[i]);
+    }
+}
+
+//obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok
+void Calculations::calculate_pistonForce_Pk_centripetal()
+{
+    for(int i=0; i<=360; i++)
+    {
+        pistonForce_Pk_centripetal[i] = pistonForce_Pk[i] * cos(alfa[i] + beta[i]);
+    }
+}
+
 void Calculations::updateChart()
 {
     for(int i=0; i<=360; i++)
     {
+        cout << endl;
         cout << i << " alfa[i]=" << alfa[i] << " gasPressureForce=" << gasPressureForce[i] << " inertialForce=" << inertialForce[i] << " pistonForce=" << pistonForce[i] << endl;
         cout << i << " alfa[i]=" << alfa[i] << " beta=" << beta[i] << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " pistonForce[i]=" << pistonForce[i] << " pistonForce_N[i]=" << pistonForce_N[i] << " pistonForce_Pk[i]=" << pistonForce_Pk[i] << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " alfa[i] + beta[i]=" << alfa[i] + beta[i] << " sin(alfa[i] + beta[i])=" << sin(alfa[i] + beta[i]) << endl;
+        cout << i << " alfa[i]=" << alfa[i] << " pistonForce_Pk_tangencial[i]=" << pistonForce_Pk_tangencial[i] << " pistonForce_Pk_centripetal[i]=" << pistonForce_Pk_centripetal[i] << endl;
     }
 }

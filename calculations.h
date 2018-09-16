@@ -18,9 +18,17 @@ public:
 
     void calculate_inertialForce();
 
+    void calculate_beta();
+
     void calculate_pistonForce();
 
-    void calculate_beta();
+    void calculate_pistonForce_N();
+
+    void calculate_pistonForce_Pk();
+
+    void calculate_pistonForce_Pk_tangencial();
+
+    void calculate_pistonForce_Pk_centripetal();
 
     void updateChart();
 
@@ -64,6 +72,17 @@ private:
     //sila wypadkowa dzialajaca na tlok
     double pistonForce[361];
 
+    //skladowa prostopadla do osi cylindra sily dzialajacej na tlok
+    double pistonForce_N[361];
+
+    //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok
+    double pistonForce_Pk[361];
+
+    //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok
+    double pistonForce_Pk_tangencial[361];
+
+    //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok
+    double pistonForce_Pk_centripetal[361];
 };
 
 #endif // CALCULATIONS_H
