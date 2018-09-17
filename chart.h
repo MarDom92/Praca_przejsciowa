@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QtCharts>
 
+#include <iostream>
+using namespace std;
+
 
 class Chart : public QWidget
 {
@@ -15,13 +18,16 @@ public:
 
     void createChart();
 
-private:
-//    QLineSeries *series = new QLineSeries();
+    void addSeriesX(double x[]);
 
+    void addSeriesY(double y[]);
+
+private:
     QChart *chart = new QChart();
 
-    //przykladowy obiekt klasy Series
-//    Series *s = new Series();
+    QVector<double> seriesX;
+
+    QVector<QVector<double>> seriesY;
 
 public:
     QChartView *chartView = new QChartView(chart);

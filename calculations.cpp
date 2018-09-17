@@ -161,69 +161,74 @@ void Calculations::calculate_torqueReactive()
     }
 }
 
-double Calculations::get_gasPressureForce()
+double *Calculations::get_alfa()
 {
-    return *gasPressureForce;
+    return alfa;
 }
 
-double Calculations::get_inertialForce()
+double *Calculations::get_gasPressureForce()
 {
-    return *inertialForce;
+    return gasPressureForce;
 }
 
-double Calculations::get_h()
+double *Calculations::get_inertialForce()
 {
-    return *h;
+    return inertialForce;
 }
 
-double Calculations::get_beta()
+double *Calculations::get_h()
 {
-    return *beta;
+    return h;
 }
 
-double Calculations::get_a()
+double *Calculations::get_beta()
 {
-    return *a;
+    return beta;
 }
 
-double Calculations::get_pistonForce()
+double *Calculations::get_a()
 {
-    return *pistonForce;
+    return a;
 }
 
-double Calculations::get_pistonForce_N()
+double *Calculations::get_pistonForce()
 {
-    return *pistonForce_N;
+    return pistonForce;
 }
 
-double Calculations::get_pistonForce_Pk()
+double *Calculations::get_pistonForce_N()
 {
-    return *pistonForce_Pk;
+    return pistonForce_N;
 }
 
-double Calculations::get_pistonForce_Pk_tangencial()
+double *Calculations::get_pistonForce_Pk()
 {
-    return *pistonForce_Pk_tangencial;
+    return pistonForce_Pk;
 }
 
-double Calculations::get_pistonForce_Pk_centripetal()
+double *Calculations::get_pistonForce_Pk_tangencial()
 {
-    return *pistonForce_Pk_centripetal;
+    return pistonForce_Pk_tangencial;
 }
 
-double Calculations::get_torqueCrankshaft()
+double *Calculations::get_pistonForce_Pk_centripetal()
 {
-    return *torqueCrankshaft;
+    return pistonForce_Pk_centripetal;
 }
 
-double Calculations::get_torque_Pk()
+double *Calculations::get_torqueCrankshaft()
 {
-    return *torque_Pk;
+    return torqueCrankshaft;
 }
 
-double Calculations::get_torqueReactive()
+double *Calculations::get_torque_Pk()
 {
-    return *torqueReactive;
+    return torque_Pk;
+}
+
+double *Calculations::get_torqueReactive()
+{
+    return torqueReactive;
 }
 
 void Calculations::updateChart()

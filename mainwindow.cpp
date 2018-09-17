@@ -82,10 +82,9 @@ MainWindow::MainWindow(QWidget *parent)
     //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
     calculations.calculate_torqueReactive();
 
-    calculations.updateChart();
+    addForcesSeries();
 
-    double a = calculations.get_gasPressureForce();
-    cout << endl << "a=" << a << endl;
+    calculations.updateChart();
 }
 
 MainWindow::~MainWindow()
@@ -94,6 +93,25 @@ MainWindow::~MainWindow()
     delete list;
     delete horizontalLayout;
     delete central;
+}
+
+void MainWindow::addForcesSeries()
+{
+    chart->addSeriesX(calculations.get_alfa());
+    chart->addSeriesY(calculations.get_gasPressureForce());
+    chart->addSeriesY(calculations.get_inertialForce());
+    chart->addSeriesY(calculations.get_pistonForce());
+    chart->addSeriesY(calculations.get_pistonForce_Pk());
+    chart->addSeriesY(calculations.get_pistonForce_N());
+    chart->addSeriesY(calculations.get_pistonForce_Pk_tangencial());
+    chart->addSeriesY(calculations.get_pistonForce_Pk_centripetal());
+}
+
+void MainWindow::addTorquesSeries()
+{
+    chart->addSeriesY(calculations.get_torqueCrankshaft());
+    chart->addSeriesY(calculations.get_torque_Pk());
+    chart->addSeriesY(calculations.get_torqueReactive());
 }
 
 void MainWindow::connectSliders()

@@ -28,19 +28,20 @@ public:
     void calculate_torque_Pk();
     void calculate_torqueReactive();
 
-    double get_gasPressureForce();
-    double get_inertialForce();
-    double get_h();
-    double get_beta();
-    double get_a();
-    double get_pistonForce();
-    double get_pistonForce_N();
-    double get_pistonForce_Pk();
-    double get_pistonForce_Pk_tangencial();
-    double get_pistonForce_Pk_centripetal();
-    double get_torqueCrankshaft();
-    double get_torque_Pk();
-    double get_torqueReactive();
+    double *get_alfa();
+    double *get_gasPressureForce();
+    double *get_inertialForce();
+    double *get_h();
+    double *get_beta();
+    double *get_a();
+    double *get_pistonForce();
+    double *get_pistonForce_N();
+    double *get_pistonForce_Pk();
+    double *get_pistonForce_Pk_tangencial();
+    double *get_pistonForce_Pk_centripetal();
+    double *get_torqueCrankshaft();
+    double *get_torque_Pk();
+    double *get_torqueReactive();
 
     void updateChart();
 
