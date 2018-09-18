@@ -18,9 +18,9 @@ public:
 
     void createChart();
 
-    void addSeriesX(double x[]);
+    void addSeriesX(QVector<double> x[]);
 
-    void addSeriesY(double y[]);
+    void addSeriesY(QVector<double> y[]);
 
 private:
     QChart *chart = new QChart();

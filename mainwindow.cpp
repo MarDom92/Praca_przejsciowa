@@ -50,10 +50,10 @@ MainWindow::MainWindow(QWidget *parent)
     calculations.calculate_inertialForce();
 
     //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    calculations.calculate_h();
+    calculations.calculate_beta();
 
     //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    calculations.calculate_beta();
+    calculations.calculate_h();
 
     //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
     calculations.calculate_a();

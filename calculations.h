@@ -1,6 +1,7 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
+#include <QVector>
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -16,8 +17,8 @@ public:
 
     void calculate_gasPressureForce();
     void calculate_inertialForce();
-    void calculate_h();
     void calculate_beta();
+    void calculate_h();
     void calculate_a();
     void calculate_pistonForce();
     void calculate_pistonForce_N();
@@ -28,29 +29,31 @@ public:
     void calculate_torque_Pk();
     void calculate_torqueReactive();
 
-    double *get_alfa();
-    double *get_gasPressureForce();
-    double *get_inertialForce();
-    double *get_h();
-    double *get_beta();
-    double *get_a();
-    double *get_pistonForce();
-    double *get_pistonForce_N();
-    double *get_pistonForce_Pk();
-    double *get_pistonForce_Pk_tangencial();
-    double *get_pistonForce_Pk_centripetal();
-    double *get_torqueCrankshaft();
-    double *get_torque_Pk();
-    double *get_torqueReactive();
+    QVector<double> *get_alfa();
+    QVector<double> *get_gasPressureForce();
+    QVector<double> *get_inertialForce();
+    QVector<double> *get_beta();
+    QVector<double> *get_h();
+    QVector<double> *get_a();
+    QVector<double> *get_pistonForce();
+    QVector<double> *get_pistonForce_N();
+    QVector<double> *get_pistonForce_Pk();
+    QVector<double> *get_pistonForce_Pk_tangencial();
+    QVector<double> *get_pistonForce_Pk_centripetal();
+    QVector<double> *get_torqueCrankshaft();
+    QVector<double> *get_torque_Pk();
+    QVector<double> *get_torqueReactive();
 
     void updateChart();
 
 private:
-    //stale cisneinei atmosferyczne P_atm [Pa]
+    const int SIZE = 360;
+
+    //stale cisnienie atmosferyczne P_atm [Pa]
     const unsigned int atmosphericPressure = 100000;
 
     //tablica katow od 0 do 360 stopni [rad]
-    double alfa[361];
+    QVector<double> alfa;
 
     //cisnienie gazu [Pa] p_g
     unsigned int gasPressure;
@@ -65,10 +68,10 @@ private:
     double d, r, l;
 
     //h to odleglosc midzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego) [m]
-    double h[361];
+    QVector<double> h;
 
     //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B [m]
-    double a[361];
+    QVector<double> a;
 
     //wspolczynnik korbowodu - stosunek r do l [-]
     double lambda;
@@ -80,37 +83,37 @@ private:
     double omega;
 
     //tablica katow pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    double beta[361];
+    QVector<double> beta;
 
     //sila cisnienia gazu w cylindrze F_g [N]
-    double gasPressureForce[361];
+    QVector<double> gasPressureForce;
 
     //sila bezwladnosci ruchu posuwisto-zwrotnego P_p, sila bezwladnosci ruchu obrotowego P_o, calkowita sila bezwladnosci F_b [N]
-    double reciprocatingInertialForce[361], rotationalInertialForce[361], inertialForce[361];
+    QVector<double> reciprocatingInertialForce, rotationalInertialForce, inertialForce;
 
     //sila wypadkowa dzialajaca na tlok P_t [N]
-    double pistonForce[361];
+    QVector<double> pistonForce;
 
     //skladowa prostopadla do osi cylindra sily dzialajacej na tlok N [N]
-    double pistonForce_N[361];
+    QVector<double> pistonForce_N;
 
     //skladowa wzdluzna do osi korbowodu sily dzialajacej na tlok P_k [N]
-    double pistonForce_Pk[361];
+    QVector<double> pistonForce_Pk;
 
     //skladowa styczna do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T [N]
-    double pistonForce_Pk_tangencial[361];
+    QVector<double> pistonForce_Pk_tangencial;
 
     //skladowa doosiowa (promieniowa) skladowej wzdluznej sily dzialajacej na tlok R [N]
-    double pistonForce_Pk_centripetal[361];
+    QVector<double> pistonForce_Pk_centripetal;
 
     //chwilowy moment obrotowy na wale korbowym M [Nm]
-    double torqueCrankshaft[361];
+    QVector<double> torqueCrankshaft;
 
     //moment M_Pk [Nm]
-    double torque_Pk[361];
+    QVector<double> torque_Pk;
 
     //moment reakcyjny dzialajacy na kadlub silnika M_r [Nm]
-    double torqueReactive[361];
+    QVector<double> torqueReactive;
 };
 
 #endif // CALCULATIONS_H
