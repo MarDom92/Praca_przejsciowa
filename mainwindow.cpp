@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     addForcesSeries();
 
+    chart->createChart();
+
     calculations.updateChart();
 }
 

@@ -9,14 +9,14 @@ Chart::Chart()
 Chart::~Chart()
 {
     delete chart;
+    delete series;
     delete chartView;
 }
 
 void Chart::createChart()
 {
-//    chart->addSeries(series);
-//    chart->addSeries(s);
-
+    createData();
+    chart->addSeries(series);
     chart->createDefaultAxes();
     chart->setTitle("Simple line chart example");
 }
@@ -43,4 +43,16 @@ void Chart::addSeriesY(QVector<double> y[])
 
     //dodanie kolejnej funkcji y(x) do wektora z funkcjami y(x)
     seriesY.push_back(v);
+}
+
+//stworzenie serii danych dla wykresu
+void Chart::createData()
+{
+    for(int i=0; i < seriesX.length(); i++)
+    {
+        QPointF s;
+        s.setX(seriesX.at(i));
+        s.setY(seriesX.at(i));
+        series->append(s.x(), s.y());
+    }
 }

@@ -22,12 +22,16 @@ public:
 
     void addSeriesY(QVector<double> y[]);
 
+    void createData();
+
 private:
     QChart *chart = new QChart();
 
     QVector<double> seriesX;
 
     QVector<QVector<double>> seriesY;
+
+    QLineSeries* series = new QLineSeries();
 
 public:
     QChartView *chartView = new QChartView(chart);
