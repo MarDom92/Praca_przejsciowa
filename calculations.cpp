@@ -39,7 +39,7 @@ void Calculations::calculate_gasPressureForce()
 {
     for(int i=0; i <= SIZE; i++)
     {
-        gasPressureForce.push_back(M_PI * d * d / 4 * (gasPressure - atmosphericPressure));
+        gasPressureForce.push_back(M_PI * d * d / 4 * (gasPressure - ATMOSPHERIC_PRESSURE));
     }
 }
 

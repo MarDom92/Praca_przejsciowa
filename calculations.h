@@ -50,7 +50,7 @@ private:
     const int SIZE = 360;
 
     //stale cisnienie atmosferyczne P_atm [Pa]
-    const unsigned int atmosphericPressure = 100000;
+    const unsigned int ATMOSPHERIC_PRESSURE = 100000;
 
     //tablica katow od 0 do 360 stopni [rad]
     QVector<double> alfa;
