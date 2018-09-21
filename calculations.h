@@ -15,21 +15,26 @@ class Calculations : public QObject
 public:
     Calculations();
 
-public slots:
+public:
     void setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin,
                        unsigned int massConnectingRod, double d, double r, double l, double n);
 
 public slots:
-    void set_gasPressure(int value);
-    void set_d(int value);
-    void set_r(int value);
-    void set_l(int value);
-    void set_n(int value);
-    void set_massPiston(int value);
-    void set_massCrankPin(int value);
-    void set_massConnectingRod(int value);
+    //sloty odbierajace sygnaly zmiany wartosci sliderow
+    void set_gasPressure(int gasPressure);
+    void set_d(int d);
+    void set_r(int r);
+    void set_l(int l);
+    void set_n(int n);
+    void set_massPiston(int massPiston);
+    void set_massCrankPin(int massCrankPin);
+    void set_massConnectingRod(int massConnectingRod);
 
 public:
+    //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
+    void calculate_otherValues();
+
+    //obliczenia sil
     void calculate_gasPressureForce();
     void calculate_inertialForce();
     void calculate_beta();
@@ -41,6 +46,7 @@ public:
     void calculate_pistonForce_Pk_tangencial();
     void calculate_pistonForce_Pk_centripetal();
 
+    //obliczenia momentow
     void calculate_torqueCrankshaft();
     void calculate_torque_Pk();
     void calculate_torqueReactive();
@@ -77,7 +83,7 @@ private:
     unsigned int gasPressure;
 
     //masa tloka m_t, masa czopu korbowego m_w, masa korbowodu m_k [kg]
-    unsigned int massPiston, massCrankPin, massConnectingRod;
+    double massPiston, massCrankPin, massConnectingRod;
 
     //masa wykonujaca ruch postepowy m_p, masa wykonujaca ruch obrotowy m_o [kg]
     double massReciprocatingMotion, massRotationalMotion;

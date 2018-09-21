@@ -13,7 +13,7 @@ Calculations::Calculations()
     cout << "konstruktor koniec, alfa->size()=" << alfa.size() << endl;
 }
 
-//pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
+//pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami na poczatku programu do poczatkowego ustaienia wartosci
 void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin, unsigned int massConnectingRod, double d, double r, double l, double n)
 {
     this->gasPressure = gasPressure * 1000;                     //konwersja [kPa] -> [Pa]
@@ -21,57 +21,80 @@ void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPist
     this->massCrankPin = massCrankPin * 0.001;                  //konwersja [g]   -> [kg]
     this->massConnectingRod = massConnectingRod * 0.001;        //konwersja [g]   -> [kg]
 
-    this->d = d;        //konwersja [cm] -> [m]
-    this->r = r;        //konwersja [cm] -> [m]
-    this->l = l;        //konwersja [cm] -> [m]
-    this->n = n;        //[obr/min]
+    this->d = d * 0.01;         //konwersja [cm] -> [m]
+    this->r = r * 0.01;         //konwersja [cm] -> [m]
+    this->l = l * 0.01;         //konwersja [cm] -> [m]
+    this->n = n;                //[obr/min]
 
+    //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
+    calculate_otherValues();
+}
+
+void Calculations::set_gasPressure(int gasPressure)
+{
+    this->gasPressure = static_cast<unsigned int>(gasPressure) * 1000;
+
+    cout << "gasPressure = " << this->gasPressure << "[Pa]" << endl;
+}
+
+void Calculations::set_d(int d)
+{
+    this->d = d * 0.01;
+
+    cout << "d = " << this->d << "[m]" << endl;
+}
+
+void Calculations::set_r(int r)
+{
+    this->r = r * 0.01;
+
+    cout << "r = " << this->r << "[m]" << endl;
+}
+
+void Calculations::set_l(int l)
+{
+    this->l = l * 0.01;
+
+    cout << "l = " << this->l << "[m]" << endl;
+}
+
+void Calculations::set_n(int n)
+{
+    this->n = n;
+
+    cout << "n = " << this->n << endl;
+}
+
+void Calculations::set_massPiston(int massPiston)
+{
+    this->massPiston = static_cast<double>(massPiston) * 0.001;
+
+    cout << "massPiston = " << this->massPiston << endl;
+}
+
+void Calculations::set_massCrankPin(int massCrankPin)
+{
+    this->massCrankPin = static_cast<double>(massCrankPin) * 0.001;
+
+    cout << "massCrankPin = " << this->massCrankPin << endl;
+}
+
+void Calculations::set_massConnectingRod(int massConnectingRod)
+{
+    this->massConnectingRod = static_cast<double>(massConnectingRod) * 0.001;
+
+    cout << "massConnectingRod = " << this->massConnectingRod << endl;
+}
+
+//obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
+void Calculations::calculate_otherValues()
+{
     //uklad dwoch mas zastepczych skupionych w srodku sworznia tlokowego oraz czopa korbowego
     massReciprocatingMotion = massPiston + 0.25 * massConnectingRod;     //[kg]
     massRotationalMotion = massCrankPin + 0.75 * massConnectingRod;      //[kg]
 
     lambda = r / l;             //[m]
     omega = M_PI * n / 30;      //konwersja [obr/min] -> [1/s]
-}
-
-void Calculations::set_gasPressure(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_d(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_r(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_l(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_n(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_massPiston(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_massCrankPin(int value)
-{
-    cout << "srednica = " << value << endl;
-}
-
-void Calculations::set_massConnectingRod(int value)
-{
-    cout << "srednica = " << value << endl;
 }
 
 //obliczenia sily cisnienia gazow F_g
