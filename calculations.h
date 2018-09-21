@@ -25,6 +25,7 @@ public:
     void calculate_pistonForce_Pk();
     void calculate_pistonForce_Pk_tangencial();
     void calculate_pistonForce_Pk_centripetal();
+
     void calculate_torqueCrankshaft();
     void calculate_torque_Pk();
     void calculate_torqueReactive();
@@ -40,6 +41,7 @@ public:
     QVector<double> *get_pistonForce_Pk();
     QVector<double> *get_pistonForce_Pk_tangencial();
     QVector<double> *get_pistonForce_Pk_centripetal();
+
     QVector<double> *get_torqueCrankshaft();
     QVector<double> *get_torque_Pk();
     QVector<double> *get_torqueReactive();

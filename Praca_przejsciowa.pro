@@ -26,12 +26,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     chart.cpp \
-    calculations.cpp
+    calculations.cpp \
+    series.cpp
 
 HEADERS += \
         mainwindow.h \
     chart.h \
-    calculations.h
+    calculations.h \
+    series.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

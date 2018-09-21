@@ -3,8 +3,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    chart->createChart();
-
     //wczytanie komponentu listy umozliwiajacego zmiane wartosci parametrow wykresu
     uiList.setupUi(list);
 

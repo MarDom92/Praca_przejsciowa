@@ -8,15 +8,28 @@ Chart::Chart()
 
 Chart::~Chart()
 {
+    delete inertialForce;
+    delete gasPressureForce;
+    delete pistonForce;
+    delete pistonForce_Pk;
+    delete pistonForce_N;
+    delete pistonForce_Pk_tangencial;
+    delete pistonForce_Pk_centripetal;
+
+    delete torque_Pk;
+    delete torqueCrankshaft;
+    delete torqueReactive;
+
     delete chart;
-    delete series;
     delete chartView;
 }
 
 void Chart::createChart()
 {
     createData();
-    chart->addSeries(series);
+
+    addSeries();
+
     chart->createDefaultAxes();
     chart->setTitle("Simple line chart example");
 }
@@ -48,11 +61,30 @@ void Chart::addSeriesY(QVector<double> y[])
 //stworzenie serii danych dla wykresu
 void Chart::createData()
 {
-    for(int i=0; i < seriesX.length(); i++)
-    {
-        QPointF s;
-        s.setX(seriesX.at(i));
-        s.setY(seriesX.at(i));
-        series->append(s.x(), s.y());
-    }
+    //sily
+    gasPressureForce = new Series(seriesX, seriesY[0]);
+    inertialForce = new Series(seriesX, seriesY[1]);
+    pistonForce = new Series(seriesX, seriesY[2]);
+    pistonForce_N = new Series(seriesX, seriesY[3]);
+    pistonForce_Pk = new Series(seriesX, seriesY[4]);
+    pistonForce_Pk_tangencial = new Series(seriesX, seriesY[5]);
+    pistonForce_Pk_centripetal = new Series(seriesX, seriesY[6]);
+
+    //momenty
+//    torque_Pk = new Series(seriesX, seriesY[]);
+//    torqueCrankshaft = new Series(seriesX, seriesY[]);
+//    torqueReactive = new Series(seriesX, seriesY[]);
+}
+
+//dodanie serii danych do wykresu
+void Chart::addSeries()
+{
+    //sily
+    chart->addSeries(gasPressureForce->getSeries());
+    chart->addSeries(inertialForce->getSeries());
+    chart->addSeries(pistonForce->getSeries());
+    chart->addSeries(pistonForce_N->getSeries());
+    chart->addSeries(pistonForce_Pk->getSeries());
+    chart->addSeries(pistonForce_Pk_tangencial->getSeries());
+    chart->addSeries(pistonForce_Pk_centripetal->getSeries());
 }
