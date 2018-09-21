@@ -1,20 +1,35 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
+#include <QObject>
 #include <QVector>
 #include <cmath>
 #include <iostream>
 using namespace std;
 
 
-class Calculations
+class Calculations : public QObject
 {
+    Q_OBJECT
+
 public:
     Calculations();
 
+public slots:
     void setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin,
                        unsigned int massConnectingRod, double d, double r, double l, double n);
 
+public slots:
+    void set_gasPressure(int value);
+    void set_d(int value);
+    void set_r(int value);
+    void set_l(int value);
+    void set_n(int value);
+    void set_massPiston(int value);
+    void set_massCrankPin(int value);
+    void set_massConnectingRod(int value);
+
+public:
     void calculate_gasPressureForce();
     void calculate_inertialForce();
     void calculate_beta();
@@ -30,6 +45,7 @@ public:
     void calculate_torque_Pk();
     void calculate_torqueReactive();
 
+public:
     QVector<double> *get_alfa();
     QVector<double> *get_gasPressureForce();
     QVector<double> *get_inertialForce();

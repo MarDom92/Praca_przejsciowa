@@ -125,4 +125,14 @@ void MainWindow::connectSliders()
     connect(uiList.horizontalSlider_massPiston, SIGNAL(valueChanged(int)), uiList.label_massPiston, SLOT(setNum(int)));
     connect(uiList.horizontalSlider_massCrankPin, SIGNAL(valueChanged(int)), uiList.label_massCrankPin, SLOT(setNum(int)));
     connect(uiList.horizontalSlider_massConnectingRod, SIGNAL(valueChanged(int)), uiList.label_massConnectingRod, SLOT(setNum(int)));
+
+    //polaczenia miedzy zmiana slidera, a zmiana wartosci w obliczeniach
+    connect(uiList.horizontalSlider_gasPressure, &QSlider::valueChanged, &calculations, &Calculations::set_gasPressure);
+    connect(uiList.horizontalSlider_d, &QSlider::valueChanged, &calculations, &Calculations::set_d);
+    connect(uiList.horizontalSlider_r, &QSlider::valueChanged, &calculations, &Calculations::set_r);
+    connect(uiList.horizontalSlider_l, &QSlider::valueChanged, &calculations, &Calculations::set_l);
+    connect(uiList.horizontalSlider_n, &QSlider::valueChanged, &calculations, &Calculations::set_n);
+    connect(uiList.horizontalSlider_massPiston, &QSlider::valueChanged, &calculations, &Calculations::set_massPiston);
+    connect(uiList.horizontalSlider_massCrankPin, &QSlider::valueChanged, &calculations, &Calculations::set_massCrankPin);
+    connect(uiList.horizontalSlider_massConnectingRod,&QSlider::valueChanged, &calculations, &Calculations::set_massConnectingRod);
 }

@@ -34,6 +34,46 @@ void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPist
     omega = M_PI * n / 30;      //konwersja [obr/min] -> [1/s]
 }
 
+void Calculations::set_gasPressure(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_d(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_r(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_l(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_n(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_massPiston(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_massCrankPin(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
+void Calculations::set_massConnectingRod(int value)
+{
+    cout << "srednica = " << value << endl;
+}
+
 //obliczenia sily cisnienia gazow F_g
 void Calculations::calculate_gasPressureForce()
 {
