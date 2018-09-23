@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 #ifdef __ANDROID__
     //TODO: dodac odpowiedni uklad dla systemu ANDROID
 #else
+
     //elementy ui ulozone poziomo obok siebie
     horizontalLayout->addWidget(list);
     horizontalLayout->addWidget(chart->chartView);
@@ -158,4 +159,18 @@ void MainWindow::connectCalculations()
     connect(&calculations, &Calculations::changedValues, &calculations, &Calculations::calculate_all);
     connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
     connect(&calculations, &Calculations::changedValues, chart, &Chart::update);
+
+    connect(uiList.checkBox_gasPressureForce, &QCheckBox::clicked, this, &MainWindow::on_checkBox_gasPressureForce_clicked);
+}
+
+void MainWindow::on_checkBox_gasPressureForce_clicked()
+{
+    if(uiList.checkBox_gasPressureForce->isChecked())
+    {
+        cout << "wcisniety" << endl;
+    }
+    else
+    {
+        cout << "pusty" << endl;
+    }
 }

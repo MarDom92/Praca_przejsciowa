@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
 
 #include "ui_list.h"
 #include "calculations.h"
@@ -11,6 +12,8 @@
 #ifndef __ANDROID__
 #include <QHBoxLayout>
 #endif
+
+using namespace std;
 
 
 class MainWindow : public QMainWindow
@@ -33,6 +36,9 @@ public slots:
     void addForcesSeries();
 
     void addTorquesSeries();
+
+private slots:
+    void on_checkBox_gasPressureForce_clicked();
 
 private:
     void connectSliders();
@@ -64,7 +70,7 @@ private:
     Series *torqueReactive;
 
 #ifndef __ANDROID__
-    QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
+    QHBoxLayout *horizontalLayout = new QHBoxLayout();
 #endif
 
 };
