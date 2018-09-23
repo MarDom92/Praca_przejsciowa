@@ -15,9 +15,11 @@ class Calculations : public QObject
 public:
     Calculations();
 
-public:
     void setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin,
                        unsigned int massConnectingRod, double d, double r, double l, double n);
+
+signals:
+    void changedValues();
 
 public slots:
     //sloty odbierajace sygnaly zmiany wartosci sliderow
@@ -30,9 +32,18 @@ public slots:
     void set_massCrankPin(int massCrankPin);
     void set_massConnectingRod(int massConnectingRod);
 
+    //oblicz wszystko
+    void calculate_all();
+
 public:
     //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
     void calculate_otherValues();
+
+    //obliczenia wszystkich sil
+    void calculate_forces();
+
+    //obliczenia wszystkich momentow
+    void calculate_torques();
 
     //obliczenia sil
     void calculate_gasPressureForce();
@@ -67,8 +78,6 @@ public:
     QVector<double> *get_torqueCrankshaft();
     QVector<double> *get_torque_Pk();
     QVector<double> *get_torqueReactive();
-
-    void updateChart();
 
 private:
     const int SIZE = 360;

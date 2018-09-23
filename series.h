@@ -3,6 +3,9 @@
 
 #include <QtCharts>
 
+#include <iostream>
+using namespace std;
+
 
 class Series
 {
@@ -11,6 +14,10 @@ public:
     ~Series();
 
     QLineSeries *getSeries();
+
+    void update(QVector<double> x, QVector<double> y);
+
+    int getLength();
 
 private:
     QPointF s;

@@ -2,15 +2,10 @@
 
 Calculations::Calculations()
 {
-    cout << "konstruktor poczatek " << endl;
-
     for(int i=0; i <= SIZE; i++)
     {
         alfa.push_back(i * M_PI / 180);
-        cout << i << " alfa[i]=" << alfa.value(i) << endl;
     }
-
-    cout << "konstruktor koniec, alfa->size()=" << alfa.size() << endl;
 }
 
 //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami na poczatku programu do poczatkowego ustaienia wartosci
@@ -34,56 +29,72 @@ void Calculations::set_gasPressure(int gasPressure)
 {
     this->gasPressure = static_cast<unsigned int>(gasPressure) * 1000;
 
-    cout << "gasPressure = " << this->gasPressure << "[Pa]" << endl;
+    emit changedValues();
+
+//    cout << "gasPressure = " << this->gasPressure << "[Pa]" << endl;
 }
 
 void Calculations::set_d(int d)
 {
     this->d = d * 0.01;
 
-    cout << "d = " << this->d << "[m]" << endl;
+    emit changedValues();
+
+//    cout << "d = " << this->d << "[m]" << endl;
 }
 
 void Calculations::set_r(int r)
 {
     this->r = r * 0.01;
 
-    cout << "r = " << this->r << "[m]" << endl;
+    emit changedValues();
+
+//    cout << "r = " << this->r << "[m]" << endl;
 }
 
 void Calculations::set_l(int l)
 {
     this->l = l * 0.01;
 
-    cout << "l = " << this->l << "[m]" << endl;
+    emit changedValues();
+
+//    cout << "l = " << this->l << "[m]" << endl;
 }
 
 void Calculations::set_n(int n)
 {
     this->n = n;
 
-    cout << "n = " << this->n << endl;
+    emit changedValues();
+
+//    cout << "n = " << this->n << endl;
 }
 
 void Calculations::set_massPiston(int massPiston)
 {
     this->massPiston = static_cast<double>(massPiston) * 0.001;
 
-    cout << "massPiston = " << this->massPiston << endl;
+    emit changedValues();
+
+//    cout << "massPiston = " << this->massPiston << endl;
 }
 
 void Calculations::set_massCrankPin(int massCrankPin)
 {
     this->massCrankPin = static_cast<double>(massCrankPin) * 0.001;
 
-    cout << "massCrankPin = " << this->massCrankPin << endl;
+    emit changedValues();
+
+//    cout << "massCrankPin = " << this->massCrankPin << endl;
 }
 
 void Calculations::set_massConnectingRod(int massConnectingRod)
 {
     this->massConnectingRod = static_cast<double>(massConnectingRod) * 0.001;
 
-    cout << "massConnectingRod = " << this->massConnectingRod << endl;
+    emit changedValues();
+
+//    cout << "massConnectingRod = " << this->massConnectingRod << endl;
 }
 
 //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
@@ -97,9 +108,44 @@ void Calculations::calculate_otherValues()
     omega = M_PI * n / 30;      //konwersja [obr/min] -> [1/s]
 }
 
+//obliczenia wszystkich sil
+void Calculations::calculate_forces()
+{
+    calculate_gasPressureForce();
+    calculate_inertialForce();
+    calculate_beta();
+    calculate_h();
+    calculate_a();
+    calculate_pistonForce();
+    calculate_pistonForce_N();
+    calculate_pistonForce_Pk();
+    calculate_pistonForce_Pk_tangencial();
+    calculate_pistonForce_Pk_centripetal();
+}
+
+//obliczenia wszystkich momentow
+void Calculations::calculate_torques()
+{
+    calculate_torqueCrankshaft();
+    calculate_torque_Pk();
+    calculate_torqueReactive();
+}
+
+//oblicz wszystko
+void Calculations::calculate_all()
+{
+    //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)
+    calculate_otherValues();
+
+    calculate_forces();
+    calculate_torques();
+}
+
 //obliczenia sily cisnienia gazow F_g
 void Calculations::calculate_gasPressureForce()
 {
+    gasPressureForce.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         gasPressureForce.push_back(M_PI * d * d / 4 * (gasPressure - ATMOSPHERIC_PRESSURE));
@@ -109,6 +155,10 @@ void Calculations::calculate_gasPressureForce()
 //obliczenia sily bezwladnosci F_b
 void Calculations::calculate_inertialForce()
 {
+    reciprocatingInertialForce.clear();
+    rotationalInertialForce.clear();
+    inertialForce.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         //sila bezwladnosci w ruchu posuwisto-zwrotnym - suma sil bezwladnosci pierwszego i drugiego rzedu P_p = P_p' + P_p''
@@ -123,6 +173,8 @@ void Calculations::calculate_inertialForce()
 //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
 void Calculations::calculate_beta()
 {
+    beta.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         //wzor z zaleznosci geometrycznych
@@ -133,6 +185,8 @@ void Calculations::calculate_beta()
 //obliczenia odleglosci miedzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego) h
 void Calculations::calculate_h()
 {
+    h.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         h.push_back(r * cos(alfa.at(i)) + l * cos(beta.at(i)));
@@ -142,6 +196,8 @@ void Calculations::calculate_h()
 //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
 void Calculations::calculate_a()
 {
+    a.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         a.push_back(h.at(i) * sin(beta.at(i)));
@@ -151,6 +207,8 @@ void Calculations::calculate_a()
 //obliczenia sily wypadkowej dzialajacej na tlok P_t
 void Calculations::calculate_pistonForce()
 {
+    pistonForce.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         //suma sily cisnienia gazow i bezwladnosci w ruchu posuwisto-zwrotnym P_t = F_g + P_p
@@ -161,6 +219,8 @@ void Calculations::calculate_pistonForce()
 //obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok N
 void Calculations::calculate_pistonForce_N()
 {
+    pistonForce_N.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         pistonForce_N.push_back(pistonForce.at(i) * tan(beta.at(i)));
@@ -170,6 +230,8 @@ void Calculations::calculate_pistonForce_N()
 //obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok P_k
 void Calculations::calculate_pistonForce_Pk()
 {
+    pistonForce_Pk.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         pistonForce_Pk.push_back(pistonForce.at(i) / cos(beta.at(i)));
@@ -179,6 +241,8 @@ void Calculations::calculate_pistonForce_Pk()
 //obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
 void Calculations::calculate_pistonForce_Pk_tangencial()
 {
+    pistonForce_Pk_tangencial.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         pistonForce_Pk_tangencial.push_back(pistonForce_Pk.at(i) * sin(alfa.at(i) + beta.at(i)));
@@ -188,6 +252,8 @@ void Calculations::calculate_pistonForce_Pk_tangencial()
 //obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok R
 void Calculations::calculate_pistonForce_Pk_centripetal()
 {
+    pistonForce_Pk_centripetal.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         pistonForce_Pk_centripetal.push_back(pistonForce_Pk.at(i) * cos(alfa.at(i) + beta.at(i)));
@@ -197,6 +263,8 @@ void Calculations::calculate_pistonForce_Pk_centripetal()
 //obliczenia chwilowego momentu obrotowego na wale korbowym M
 void Calculations::calculate_torqueCrankshaft()
 {
+    torqueCrankshaft.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         torqueCrankshaft.push_back(pistonForce_Pk_tangencial.at(i) * r);
@@ -206,6 +274,8 @@ void Calculations::calculate_torqueCrankshaft()
 //obliczenia momentu od sily P_k na ramieniu a
 void Calculations::calculate_torque_Pk()
 {
+    torque_Pk.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         //a to odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
@@ -216,6 +286,8 @@ void Calculations::calculate_torque_Pk()
 //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
 void Calculations::calculate_torqueReactive()
 {
+    torqueReactive.clear();
+
     for(int i=0; i <= SIZE; i++)
     {
         //h to odleglosc miedzy pktem A (srodkiem sworznia tlokowego), a pktem O (srodkiem czopa korbowego)
@@ -291,19 +363,4 @@ QVector<double> *Calculations::get_torque_Pk()
 QVector<double> *Calculations::get_torqueReactive()
 {
     return &torqueReactive;
-}
-
-void Calculations::updateChart()
-{
-//    for(int i=0; i<=360; i++)
-//    {
-//        cout << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " gasPressureForce=" << gasPressureForce[i] << " inertialForce=" << inertialForce[i] << " pistonForce=" << pistonForce[i] << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " beta=" << beta[i] << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " pistonForce[i]=" << pistonForce[i] << " pistonForce_N[i]=" << pistonForce_N[i] << " pistonForce_Pk[i]=" << pistonForce_Pk[i] << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " alfa[i] + beta[i]=" << alfa[i] + beta[i] << " sin(alfa[i] + beta[i])=" << sin(alfa[i] + beta[i]) << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " pistonForce_Pk_tangencial[i]=" << pistonForce_Pk_tangencial[i] << " pistonForce_Pk_centripetal[i]=" << pistonForce_Pk_centripetal[i] << endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " torqueCrankshaft[i]=" << torqueCrankshaft[i] << " h[i]=" << h[i] << " torqueReactive[i]=" << torqueReactive[i] <<endl;
-//        cout << i << " alfa[i]=" << alfa[i] << " a[i]=" << a[i] << " torque_Pk[i]=" << torque_Pk[i] << endl;
-//    }
 }

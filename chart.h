@@ -20,27 +20,20 @@ public:
 
     void createChart();
 
-    void addSeriesX(QVector<double> x[]);
+    void addSeries(Series s);
 
-    void addSeriesY(QVector<double> y[]);
-
-    void createData();
-
-    void addSeries();
+public slots:
+    void update();
 
 private:
     QChart *chart = new QChart();
 
-    QVector<double> seriesX;
-
-    QVector<QVector<double>> seriesY;
-
     //serie danych sil
-    Series *inertialForce;
     Series *gasPressureForce;
+    Series *inertialForce;
     Series *pistonForce;
-    Series *pistonForce_Pk;
     Series *pistonForce_N;
+    Series *pistonForce_Pk;
     Series *pistonForce_Pk_tangencial;
     Series *pistonForce_Pk_centripetal;
 

@@ -4,8 +4,9 @@
 #include <QMainWindow>
 
 #include "ui_list.h"
-#include "chart.h"
 #include "calculations.h"
+#include "chart.h"
+#include "series.h"
 
 #ifndef __ANDROID__
 #include <QHBoxLayout>
@@ -20,11 +21,24 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void createForcesSeries();
+
+    void updateForcesSeries();
+
+    void createTorquesSeries();
+
+    void updateTorquesSeries();
+
     void addForcesSeries();
 
     void addTorquesSeries();
 
 private:
+    void connectSliders();
+
+    void connectCalculations();
+
     Chart *chart = new Chart();
 
     QWidget *list = new QWidget(this);
@@ -35,11 +49,23 @@ private:
 
     Calculations calculations;
 
+    //serie danych sil
+    Series *gasPressureForce;
+    Series *inertialForce;
+    Series *pistonForce;
+    Series *pistonForce_N;
+    Series *pistonForce_Pk;
+    Series *pistonForce_Pk_tangencial;
+    Series *pistonForce_Pk_centripetal;
+
+    //serie danych momentow sil
+    Series *torque_Pk;
+    Series *torqueCrankshaft;
+    Series *torqueReactive;
+
 #ifndef __ANDROID__
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
 #endif
-
-    void connectSliders();
 
 };
 

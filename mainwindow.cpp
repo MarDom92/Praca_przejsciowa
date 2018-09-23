@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1200, 800);
 
     connectSliders();
+
+    connectCalculations();
 #endif
 
     //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
@@ -41,77 +43,90 @@ MainWindow::MainWindow(QWidget *parent)
                 uiList.horizontalSlider_n->value()
                 );
 
-    //obliczenia sily cisnienia gazow F_g
-    calculations.calculate_gasPressureForce();
+    calculations.calculate_all();
 
-    //obliczenia sily bezwladnosci F_b
-    calculations.calculate_inertialForce();
-
-    //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    calculations.calculate_beta();
-
-    //obliczenia kata pomiedzy korbowodem a osia przechodzaca przez srodek sworznia tlokowego i srodek czopa korbowego
-    calculations.calculate_h();
-
-    //obliczenia odleglosci (promienia), na ktorym dziala moment od sily P_k z pktu O wzgledem pktu B
-    calculations.calculate_a();
-
-    //obliczenia sily wypadkowej dzialajacej na tlok P_t
-    calculations.calculate_pistonForce();
-
-    //obliczenia skladowej prostopadlej do osi cylindra sily dzialajacej na tlok N
-    calculations.calculate_pistonForce_N();
-
-    //obliczenia skladowej wzdluznej do osi korbowodu sily dzialajacej na tlok P_k
-    calculations.calculate_pistonForce_Pk();
-
-    //obliczenia skladowej stycznej do okregu o promieniu r skladowej wzdluznej sily dzialajacej na tlok T
-    calculations.calculate_pistonForce_Pk_tangencial();
-
-    //obliczenia skladowej doosiowej (promieniowej) skladowej wzdluznej sily dzialajacej na tlok R
-    calculations.calculate_pistonForce_Pk_centripetal();
-
-    //obliczenia chwilowego momentu obrotowego na wale korbowym M
-    calculations.calculate_torqueCrankshaft();
-
-    //obliczenia momentu od sily P_k na ramieniu a
-    calculations.calculate_torque_Pk();
-
-    //obliczenia momentu reakcyjnego dzialajacego na kadlub silnika M_r
-    calculations.calculate_torqueReactive();
+    createForcesSeries();
 
     addForcesSeries();
 
     chart->createChart();
-
-    calculations.updateChart();
 }
 
 MainWindow::~MainWindow()
 {
+    delete gasPressureForce;
+    delete inertialForce;
+    delete pistonForce;
+    delete pistonForce_N;
+    delete pistonForce_Pk;
+    delete pistonForce_Pk_tangencial;
+    delete pistonForce_Pk_centripetal;
+
+    delete torque_Pk;
+    delete torqueCrankshaft;
+    delete torqueReactive;
+
     delete chart;
+
     delete list;
     delete horizontalLayout;
     delete central;
 }
 
+void MainWindow::createForcesSeries()
+{
+    //sily
+    gasPressureForce = new Series(*calculations.get_alfa(), *calculations.get_gasPressureForce());
+    inertialForce = new Series(*calculations.get_alfa(), *calculations.get_inertialForce());
+    pistonForce = new Series(*calculations.get_alfa(), *calculations.get_pistonForce());
+    pistonForce_N = new Series(*calculations.get_alfa(), *calculations.get_pistonForce_N());
+    pistonForce_Pk = new Series(*calculations.get_alfa(), *calculations.get_pistonForce_Pk());
+    pistonForce_Pk_tangencial = new Series(*calculations.get_alfa(), *calculations.get_pistonForce_Pk_tangencial());
+    pistonForce_Pk_centripetal = new Series(*calculations.get_alfa(), *calculations.get_pistonForce_Pk_centripetal());
+}
+
+void MainWindow::updateForcesSeries()
+{
+    gasPressureForce->update(*calculations.get_alfa(), *calculations.get_gasPressureForce());
+    inertialForce->update(*calculations.get_alfa(), *calculations.get_inertialForce());
+    pistonForce->update(*calculations.get_alfa(), *calculations.get_pistonForce());
+    pistonForce_N->update(*calculations.get_alfa(), *calculations.get_pistonForce_N());
+    pistonForce_Pk->update(*calculations.get_alfa(), *calculations.get_pistonForce_Pk());
+    pistonForce_Pk_tangencial->update(*calculations.get_alfa(), *calculations.get_pistonForce_Pk_tangencial());
+    pistonForce_Pk_centripetal->update(*calculations.get_alfa(), *calculations.get_pistonForce_Pk_centripetal());
+}
+
+void MainWindow::createTorquesSeries()
+{
+    //momenty
+    torque_Pk =  new Series(*calculations.get_alfa(), *calculations.get_torque_Pk());
+    torqueCrankshaft =  new Series(*calculations.get_alfa(), *calculations.get_torqueCrankshaft());
+    torqueReactive =  new Series(*calculations.get_alfa(), *calculations.get_torqueReactive());
+}
+
+void MainWindow::updateTorquesSeries()
+{
+    torque_Pk->update(*calculations.get_alfa(), *calculations.get_torque_Pk());
+    torqueCrankshaft->update(*calculations.get_alfa(), *calculations.get_torqueCrankshaft());
+    torqueReactive->update(*calculations.get_alfa(), *calculations.get_torqueReactive());
+}
+
 void MainWindow::addForcesSeries()
 {
-    chart->addSeriesX(calculations.get_alfa());
-    chart->addSeriesY(calculations.get_gasPressureForce());
-    chart->addSeriesY(calculations.get_inertialForce());
-    chart->addSeriesY(calculations.get_pistonForce());
-    chart->addSeriesY(calculations.get_pistonForce_Pk());
-    chart->addSeriesY(calculations.get_pistonForce_N());
-    chart->addSeriesY(calculations.get_pistonForce_Pk_tangencial());
-    chart->addSeriesY(calculations.get_pistonForce_Pk_centripetal());
+    chart->addSeries(*gasPressureForce);
+    chart->addSeries(*inertialForce);
+    chart->addSeries(*pistonForce);
+    chart->addSeries(*pistonForce_N);
+    chart->addSeries(*pistonForce_Pk);
+    chart->addSeries(*pistonForce_Pk_tangencial);
+    chart->addSeries(*pistonForce_Pk_centripetal);
 }
 
 void MainWindow::addTorquesSeries()
 {
-    chart->addSeriesY(calculations.get_torqueCrankshaft());
-    chart->addSeriesY(calculations.get_torque_Pk());
-    chart->addSeriesY(calculations.get_torqueReactive());
+        chart->addSeries(*torque_Pk);
+        chart->addSeries(*torqueCrankshaft);
+        chart->addSeries(*torqueReactive);
 }
 
 void MainWindow::connectSliders()
@@ -135,4 +150,12 @@ void MainWindow::connectSliders()
     connect(uiList.horizontalSlider_massPiston, &QSlider::valueChanged, &calculations, &Calculations::set_massPiston);
     connect(uiList.horizontalSlider_massCrankPin, &QSlider::valueChanged, &calculations, &Calculations::set_massCrankPin);
     connect(uiList.horizontalSlider_massConnectingRod,&QSlider::valueChanged, &calculations, &Calculations::set_massConnectingRod);
+}
+
+void MainWindow::connectCalculations()
+{
+    //polaczenia miedzy emitowanym sygnalem o zmianie wartosci z funkcjami obliczen i wyswietlania na wykresie
+    connect(&calculations, &Calculations::changedValues, &calculations, &Calculations::calculate_all);
+    connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
+    connect(&calculations, &Calculations::changedValues, chart, &Chart::update);
 }
