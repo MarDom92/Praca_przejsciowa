@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
     connectSliders();
 
     connectCalculations();
+
+    connectCheckboxes();
 #endif
 
     //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
@@ -159,18 +161,73 @@ void MainWindow::connectCalculations()
     connect(&calculations, &Calculations::changedValues, &calculations, &Calculations::calculate_all);
     connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
     connect(&calculations, &Calculations::changedValues, chart, &Chart::update);
+}
 
+void MainWindow::connectCheckboxes()
+{
+    //laczy checkboxy ze slotami, ktore beda odpowiadac za wyswietlanie lub ukrywanie serii na wykresie
+
+    //sily
     connect(uiList.checkBox_gasPressureForce, &QCheckBox::clicked, this, &MainWindow::on_checkBox_gasPressureForce_clicked);
+    connect(uiList.checkBox_inertialForce, &QCheckBox::clicked, this, &MainWindow::on_checkBox_inertialForce_clicked);
+    connect(uiList.checkBox_pistonForce, &QCheckBox::clicked, this, &MainWindow::on_checkBox_pistonForce_clicked);
+    connect(uiList.checkBox_pistonForce_N, &QCheckBox::clicked, this, &MainWindow::on_checkBox_pistonForce_N_clicked);
+    connect(uiList.checkBox_pistonForce_Pk, &QCheckBox::clicked, this, &MainWindow::on_checkBox_pistonForce_Pk_clicked);
+    connect(uiList.checkBox_pistonForce_Pk_tangencial, &QCheckBox::clicked, this, &MainWindow::on_checkBox_pistonForce_Pk_tangencial_clicked);
+    connect(uiList.checkBox_pistonForce_Pk_centripetal, &QCheckBox::clicked, this, &MainWindow::on_checkBox_pistonForce_Pk_centripetal_clicked);
+
+    //momenty
+    connect(uiList.checkBox_torqueCrankshaft, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torqueCrankshaft_clicked);
+    connect(uiList.checkBox_torque_Pk, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torque_Pk_clicked);
+    connect(uiList.checkBox_torqueReactive, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torqueReactive_clicked);
 }
 
 void MainWindow::on_checkBox_gasPressureForce_clicked()
 {
-    if(uiList.checkBox_gasPressureForce->isChecked())
-    {
-        cout << "wcisniety" << endl;
-    }
-    else
-    {
-        cout << "pusty" << endl;
-    }
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_inertialForce_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_pistonForce_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_pistonForce_N_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_pistonForce_Pk_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_pistonForce_Pk_tangencial_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_pistonForce_Pk_centripetal_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_torqueCrankshaft_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_torque_Pk_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
+}
+
+void MainWindow::on_checkBox_torqueReactive_clicked()
+{
+    cout << "wcisnieto checkbox" << endl;
 }

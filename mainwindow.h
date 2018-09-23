@@ -40,10 +40,30 @@ public slots:
 private slots:
     void on_checkBox_gasPressureForce_clicked();
 
+    void on_checkBox_inertialForce_clicked();
+
+    void on_checkBox_pistonForce_clicked();
+
+    void on_checkBox_pistonForce_N_clicked();
+
+    void on_checkBox_pistonForce_Pk_clicked();
+
+    void on_checkBox_pistonForce_Pk_tangencial_clicked();
+
+    void on_checkBox_pistonForce_Pk_centripetal_clicked();
+
+    void on_checkBox_torqueCrankshaft_clicked();
+
+    void on_checkBox_torque_Pk_clicked();
+
+    void on_checkBox_torqueReactive_clicked();
+
 private:
     void connectSliders();
 
     void connectCalculations();
+
+    void connectCheckboxes();
 
     Chart *chart = new Chart();
 
