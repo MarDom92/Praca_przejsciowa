@@ -511,12 +511,18 @@
                 <property name="text">
                  <string>Ciśnienia gazu</string>
                 </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QCheckBox" name="checkBox_inertialForce">
                 <property name="text">
                  <string>Bezwładności</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -525,12 +531,18 @@
                 <property name="text">
                  <string>Działająca na tłok</string>
                 </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QCheckBox" name="checkBox_pistonForce_N">
                 <property name="text">
                  <string>Działająca na tłok (skł. prostopadła)</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -539,6 +551,9 @@
                 <property name="text">
                  <string>Działająca na tłok (skł. wzdłużna)</string>
                 </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -546,12 +561,18 @@
                 <property name="text">
                  <string>Działająca na tłok (skł. styczna)</string>
                 </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QCheckBox" name="checkBox_pistonForce_Pk_centripetal">
                 <property name="text">
                  <string>Działająca na tłok (skł. doosiowa)</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -566,6 +587,9 @@
                <widget class="QCheckBox" name="checkBox_torqueCrankshaft">
                 <property name="text">
                  <string>Obrotowy wału korbowego</string>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

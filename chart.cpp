@@ -14,7 +14,7 @@ Chart::~Chart()
 
 void Chart::createChart()
 {
-    update();
+//    update();
 
     chart->createDefaultAxes();
     chart->setTitle("Simple line chart example");
@@ -24,6 +24,16 @@ void Chart::createChart()
 void Chart::addSeries(Series s)
 {
     chart->addSeries(s.getSeries());
+}
+
+void Chart::removeSeries(Series s)
+{
+    chart->removeSeries(s.getSeries());
+}
+
+void Chart::refreshAxes()
+{
+    chart->createDefaultAxes();
 }
 
 void Chart::update()

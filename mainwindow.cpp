@@ -184,50 +184,160 @@ void MainWindow::connectCheckboxes()
 
 void MainWindow::on_checkBox_gasPressureForce_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_gasPressureForce->isChecked())
+    {
+        chart->addSeries(*gasPressureForce);
+        cout << "dodajemy serie gasPressureForce" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*gasPressureForce);
+        cout << "usuwamy serie gasPressureForce" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_inertialForce_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_inertialForce->isChecked())
+    {
+        chart->addSeries(*inertialForce);
+        cout << "dodajemy serie inertialForce" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*inertialForce);
+        cout << "usuwamy serie inertialForce" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_pistonForce_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_pistonForce->isChecked())
+    {
+        chart->addSeries(*pistonForce);
+        cout << "dodajemy serie pistonForce" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*pistonForce);
+        cout << "usuwamy serie pistonForce" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_pistonForce_N_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_pistonForce_N->isChecked())
+    {
+        chart->addSeries(*pistonForce_N);
+        cout << "dodajemy serie pistonForce_N" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*pistonForce_N);
+        cout << "usuwamy serie pistonForce_N" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_pistonForce_Pk_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_pistonForce_Pk->isChecked())
+    {
+        chart->addSeries(*pistonForce_Pk);
+        cout << "dodajemy serie pistonForce_Pk" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*pistonForce_Pk);
+        cout << "usuwamy serie pistonForce_Pk" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_pistonForce_Pk_tangencial_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_pistonForce_Pk_tangencial->isChecked())
+    {
+        chart->addSeries(*pistonForce_Pk_tangencial);
+        cout << "dodajemy serie pistonForce_Pk_tangencial" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*pistonForce_Pk_tangencial);
+        cout << "usuwamy serie pistonForce_Pk_tangencial" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_pistonForce_Pk_centripetal_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_pistonForce_Pk_centripetal->isChecked())
+    {
+        chart->addSeries(*pistonForce_Pk_centripetal);
+        cout << "dodajemy serie pistonForce_Pk_centripetal" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*pistonForce_Pk_centripetal);
+        cout << "usuwamy serie pistonForce_Pk_centripetal" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_torqueCrankshaft_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_torqueCrankshaft->isChecked())
+    {
+        chart->addSeries(*torqueCrankshaft);
+        cout << "dodajemy serie inertialForce" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*torqueCrankshaft);
+        cout << "usuwamy serie torqueCrankshaft" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_torque_Pk_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_torque_Pk->isChecked())
+    {
+        chart->addSeries(*torque_Pk);
+        cout << "dodajemy serie torque_Pk" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*torque_Pk);
+        cout << "usuwamy serie torque_Pk" << endl;
+    }
+
+    chart->refreshAxes();
 }
 
 void MainWindow::on_checkBox_torqueReactive_clicked()
 {
-    cout << "wcisnieto checkbox" << endl;
+    if(uiList.checkBox_torqueReactive->isChecked())
+    {
+        chart->addSeries(*torqueReactive);
+        cout << "dodajemy serie torqueReactive" << endl;
+    }
+    else
+    {
+        chart->removeSeries(*torqueReactive);
+        cout << "usuwamy serie torqueReactive" << endl;
+    }
+
+    chart->refreshAxes();
 }

@@ -22,6 +22,10 @@ public:
 
     void addSeries(Series s);
 
+    void removeSeries(Series s);
+
+    void refreshAxes();
+
 public slots:
     void update();
 
