@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <iostream>
+#include <QTabWidget>
 
 #include "ui_list.h"
 #include "calculations.h"
@@ -58,12 +59,16 @@ private slots:
 
     void on_checkBox_torqueReactive_clicked();
 
+    void on_tabWidget_parameters_currentChanged(int index);
+
 private:
     void connectSliders();
 
     void connectCalculations();
 
     void connectCheckboxes();
+
+    void connectTabWidgets();
 
     Chart *chart = new Chart();
 

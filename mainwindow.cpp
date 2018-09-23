@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
     connectCalculations();
 
     connectCheckboxes();
+
+    connectTabWidgets();
+
 #endif
 
     //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami
@@ -49,8 +52,10 @@ MainWindow::MainWindow(QWidget *parent)
     calculations.calculate_all();
 
     createForcesSeries();
+    createTorquesSeries();
 
     addForcesSeries();
+    addTorquesSeries();
 
     chart->createChart();
 }
@@ -116,19 +121,37 @@ void MainWindow::updateTorquesSeries()
 
 void MainWindow::addForcesSeries()
 {
-    chart->addSeries(*gasPressureForce);
-    chart->addSeries(*inertialForce);
-    chart->addSeries(*pistonForce);
-    chart->addSeries(*pistonForce_N);
-    chart->addSeries(*pistonForce_Pk);
-    chart->addSeries(*pistonForce_Pk_tangencial);
-    chart->addSeries(*pistonForce_Pk_centripetal);
+    if(uiList.checkBox_gasPressureForce->isChecked())
+        chart->addSeries(*gasPressureForce);
+
+    if(uiList.checkBox_inertialForce->isChecked())
+        chart->addSeries(*inertialForce);
+
+    if(uiList.checkBox_pistonForce->isChecked())
+        chart->addSeries(*pistonForce);
+
+    if(uiList.checkBox_pistonForce_N->isChecked())
+        chart->addSeries(*pistonForce_N);
+
+    if(uiList.checkBox_pistonForce_Pk->isChecked())
+        chart->addSeries(*pistonForce_Pk);
+
+    if(uiList.checkBox_pistonForce_Pk_tangencial->isChecked())
+        chart->addSeries(*pistonForce_Pk_tangencial);
+
+    if(uiList.checkBox_pistonForce_Pk_centripetal->isChecked())
+        chart->addSeries(*pistonForce_Pk_centripetal);
 }
 
 void MainWindow::addTorquesSeries()
 {
-        chart->addSeries(*torque_Pk);
+    if(uiList.checkBox_torqueCrankshaft->isChecked())
         chart->addSeries(*torqueCrankshaft);
+
+    if(uiList.checkBox_torque_Pk->isChecked())
+        chart->addSeries(*torque_Pk);
+
+    if(uiList.checkBox_torqueReactive->isChecked())
         chart->addSeries(*torqueReactive);
 }
 
@@ -160,6 +183,7 @@ void MainWindow::connectCalculations()
     //polaczenia miedzy emitowanym sygnalem o zmianie wartosci z funkcjami obliczen i wyswietlania na wykresie
     connect(&calculations, &Calculations::changedValues, &calculations, &Calculations::calculate_all);
     connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
+    connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateTorquesSeries);
     connect(&calculations, &Calculations::changedValues, chart, &Chart::update);
 }
 
@@ -180,6 +204,12 @@ void MainWindow::connectCheckboxes()
     connect(uiList.checkBox_torqueCrankshaft, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torqueCrankshaft_clicked);
     connect(uiList.checkBox_torque_Pk, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torque_Pk_clicked);
     connect(uiList.checkBox_torqueReactive, &QCheckBox::clicked, this, &MainWindow::on_checkBox_torqueReactive_clicked);
+}
+
+void MainWindow::connectTabWidgets()
+{
+    //laczy zmiane zakladek z checkboxami - wybor czy wyswietlac checkboxy sil czy momentow
+    connect(uiList.tabWidget_parameters, &QTabWidget::currentChanged, this, &MainWindow::on_tabWidget_parameters_currentChanged);
 }
 
 void MainWindow::on_checkBox_gasPressureForce_clicked()
@@ -337,6 +367,36 @@ void MainWindow::on_checkBox_torqueReactive_clicked()
     {
         chart->removeSeries(*torqueReactive);
         cout << "usuwamy serie torqueReactive" << endl;
+    }
+
+    chart->refreshAxes();
+}
+
+void MainWindow::on_tabWidget_parameters_currentChanged(int index)
+{
+    //wyswietlaj checkboxy dla sil
+    if(index == 0)
+    {
+        chart->changeTitle("Sily w układzie tłokowo-korbowym");
+        chart->removeAllSeries();
+
+        connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
+        disconnect(&calculations, &Calculations::changedValues, this, &MainWindow::updateTorquesSeries);
+
+        createForcesSeries();
+        addForcesSeries();
+    }
+    //wyswietlaj checkboxy dla momentow
+    else
+    {
+        chart->changeTitle("Momenty w układzie tłokowo-korbowym");
+        chart->removeAllSeries();
+
+        disconnect(&calculations, &Calculations::changedValues, this, &MainWindow::updateForcesSeries);
+        connect(&calculations, &Calculations::changedValues, this, &MainWindow::updateTorquesSeries);
+
+        createTorquesSeries();
+        addTorquesSeries();
     }
 
     chart->refreshAxes();

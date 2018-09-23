@@ -17,7 +17,7 @@ void Chart::createChart()
 //    update();
 
     chart->createDefaultAxes();
-    chart->setTitle("Simple line chart example");
+    chart->setTitle("Sily w układzie tłokowo-korbowym");
 }
 
 //dodanie wszystkich serii danych do wykresu
@@ -31,9 +31,19 @@ void Chart::removeSeries(Series s)
     chart->removeSeries(s.getSeries());
 }
 
+void Chart::removeAllSeries()
+{
+    chart->removeAllSeries();
+}
+
 void Chart::refreshAxes()
 {
     chart->createDefaultAxes();
+}
+
+void Chart::changeTitle(QString str)
+{
+    chart->setTitle(str);
 }
 
 void Chart::update()

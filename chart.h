@@ -24,7 +24,11 @@ public:
 
     void removeSeries(Series s);
 
+    void removeAllSeries();
+
     void refreshAxes();
+
+    void changeTitle(QString str);
 
 public slots:
     void update();
