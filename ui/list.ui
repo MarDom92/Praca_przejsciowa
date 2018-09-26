@@ -98,19 +98,19 @@
           <item>
            <widget class="QSlider" name="horizontalSlider_gasPressure">
             <property name="minimum">
-             <number>100</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>20000</number>
+             <number>40</number>
             </property>
             <property name="singleStep">
-             <number>500</number>
+             <number>1</number>
             </property>
             <property name="pageStep">
-             <number>500</number>
+             <number>1</number>
             </property>
             <property name="value">
-             <number>10000</number>
+             <number>20</number>
             </property>
             <property name="tracking">
              <bool>true</bool>

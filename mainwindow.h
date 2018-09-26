@@ -27,39 +27,33 @@ public:
 
 public slots:
     void createForcesSeries();
-
     void updateForcesSeries();
 
     void createTorquesSeries();
-
     void updateTorquesSeries();
 
     void addForcesSeries();
-
     void addTorquesSeries();
 
 private slots:
     void on_checkBox_gasPressureForce_clicked();
-
     void on_checkBox_inertialForce_clicked();
-
     void on_checkBox_pistonForce_clicked();
-
     void on_checkBox_pistonForce_N_clicked();
-
     void on_checkBox_pistonForce_Pk_clicked();
-
     void on_checkBox_pistonForce_Pk_tangencial_clicked();
-
     void on_checkBox_pistonForce_Pk_centripetal_clicked();
-
     void on_checkBox_torqueCrankshaft_clicked();
-
     void on_checkBox_torque_Pk_clicked();
-
     void on_checkBox_torqueReactive_clicked();
-
     void on_tabWidget_parameters_currentChanged(int index);
+
+    //sygnaly zmieniajace wartosc tekstu w labelach, wywolywane po zmianie wartosci sliderow
+    void setNum_label_gasPressure();
+    void setNum_label_n();
+    void setNum_label_massPiston();
+    void setNum_label_massCrankPin();
+    void setNum_label_massConnectingRod();
 
 private:
     void connectSliders();

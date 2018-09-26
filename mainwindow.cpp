@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     createTorquesSeries();
 
     addForcesSeries();
-    addTorquesSeries();
+//    addTorquesSeries();
 
     chart->createChart();
 }
@@ -159,16 +159,6 @@ void MainWindow::addTorquesSeries()
 
 void MainWindow::connectSliders()
 {
-    //polaczenia miedzy zmiana slidera, a zmiana wartosci wyswietlanej w labelu
-    connect(uiList.horizontalSlider_gasPressure, SIGNAL(valueChanged(int)), uiList.label_gasPressure, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_d, SIGNAL(valueChanged(int)), uiList.label_d, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_r, SIGNAL(valueChanged(int)), uiList.label_r, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_l, SIGNAL(valueChanged(int)), uiList.label_l, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_n, SIGNAL(valueChanged(int)), uiList.label_n, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_massPiston, SIGNAL(valueChanged(int)), uiList.label_massPiston, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_massCrankPin, SIGNAL(valueChanged(int)), uiList.label_massCrankPin, SLOT(setNum(int)));
-    connect(uiList.horizontalSlider_massConnectingRod, SIGNAL(valueChanged(int)), uiList.label_massConnectingRod, SLOT(setNum(int)));
-
     //polaczenia miedzy zmiana slidera, a zmiana wartosci w obliczeniach
     connect(uiList.horizontalSlider_gasPressure, &QSlider::valueChanged, &calculations, &Calculations::set_gasPressure);
     connect(uiList.horizontalSlider_d, &QSlider::valueChanged, &calculations, &Calculations::set_d);
@@ -178,6 +168,16 @@ void MainWindow::connectSliders()
     connect(uiList.horizontalSlider_massPiston, &QSlider::valueChanged, &calculations, &Calculations::set_massPiston);
     connect(uiList.horizontalSlider_massCrankPin, &QSlider::valueChanged, &calculations, &Calculations::set_massCrankPin);
     connect(uiList.horizontalSlider_massConnectingRod,&QSlider::valueChanged, &calculations, &Calculations::set_massConnectingRod);
+
+    //polaczenia miedzy zmiana slidera, a zmiana wartosci wyswietlanej w labelu
+    connect(uiList.horizontalSlider_gasPressure, &QSlider::valueChanged, this, &MainWindow::setNum_label_gasPressure);
+    connect(uiList.horizontalSlider_d, SIGNAL(valueChanged(int)), uiList.label_d, SLOT(setNum(int)));
+    connect(uiList.horizontalSlider_r, SIGNAL(valueChanged(int)), uiList.label_r, SLOT(setNum(int)));
+    connect(uiList.horizontalSlider_l, SIGNAL(valueChanged(int)), uiList.label_l, SLOT(setNum(int)));
+    connect(uiList.horizontalSlider_n, &QSlider::valueChanged, this, &MainWindow::setNum_label_n);
+    connect(uiList.horizontalSlider_massPiston, &QSlider::valueChanged, this, &MainWindow::setNum_label_massPiston);
+    connect(uiList.horizontalSlider_massCrankPin, &QSlider::valueChanged, this, &MainWindow::setNum_label_massCrankPin);
+    connect(uiList.horizontalSlider_massConnectingRod, &QSlider::valueChanged, this, &MainWindow::setNum_label_massConnectingRod);
 }
 
 void MainWindow::connectCalculations()
@@ -382,4 +382,34 @@ void MainWindow::on_tabWidget_parameters_currentChanged(int index)
     }
 
     chart->refreshAxes();
+}
+
+void MainWindow::setNum_label_gasPressure()
+{
+    // przeliczamy z [Pa] na [kPa]
+    uiList.label_gasPressure->setNum((calculations.get_gasPressure()) / 1000);
+}
+
+void MainWindow::setNum_label_n()
+{
+    // w [obr/min]
+    uiList.label_n->setNum(calculations.get_n());
+}
+
+void MainWindow::setNum_label_massPiston()
+{
+    // przeliczamy z [kg] na [g]
+    uiList.label_massPiston->setNum((calculations.get_massPiston() * 1000));
+}
+
+void MainWindow::setNum_label_massCrankPin()
+{
+    // przeliczamy z [kg] na [g]
+    uiList.label_massCrankPin->setNum((calculations.get_massCrankPin() * 1000));
+}
+
+void MainWindow::setNum_label_massConnectingRod()
+{
+    // przeliczamy z [kg] na [g]
+    uiList.label_massConnectingRod->setNum((calculations.get_massConnectingRod() * 1000));
 }

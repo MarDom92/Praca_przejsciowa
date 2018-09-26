@@ -11,7 +11,7 @@ Calculations::Calculations()
 //pobranie wartosci zmiennych do obliczen sil z wartosci ustawionych sliderami na poczatku programu do poczatkowego ustaienia wartosci
 void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPiston, unsigned int massCrankPin, unsigned int massConnectingRod, double d, double r, double l, double n)
 {
-    this->gasPressure = gasPressure * 1000;                     //konwersja [kPa] -> [Pa]
+    this->gasPressure = gasPressure * 1000 * 500;                     //konwersja [kPa] -> [Pa]
     this->massPiston = massPiston * 0.001;                      //konwersja [g]   -> [kg]
     this->massCrankPin = massCrankPin * 0.001;                  //konwersja [g]   -> [kg]
     this->massConnectingRod = massConnectingRod * 0.001;        //konwersja [g]   -> [kg]
@@ -27,7 +27,7 @@ void Calculations::setDataValues(unsigned int gasPressure, unsigned int massPist
 
 void Calculations::set_gasPressure(int gasPressure)
 {
-    this->gasPressure = static_cast<unsigned int>(gasPressure) * 1000;
+    this->gasPressure = static_cast<unsigned int>(gasPressure) * 1000 * 500;
 
     emit changedValues();
 
@@ -94,7 +94,32 @@ void Calculations::set_massConnectingRod(int massConnectingRod)
 
     emit changedValues();
 
-//    cout << "massConnectingRod = " << this->massConnectingRod << endl;
+    //    cout << "massConnectingRod = " << this->massConnectingRod << endl;
+}
+
+int Calculations::get_gasPressure()
+{
+    return gasPressure;
+}
+
+double Calculations::get_n()
+{
+    return n;
+}
+
+double Calculations::get_massPiston()
+{
+    return massPiston;
+}
+
+double Calculations::get_massCrankPin()
+{
+    return massCrankPin;
+}
+
+double Calculations::get_massConnectingRod()
+{
+    return massConnectingRod;
 }
 
 //obliczenia innych pomocniczych zmiennych (dlugosci, katow, mas, itp.)

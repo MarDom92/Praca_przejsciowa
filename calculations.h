@@ -31,6 +31,12 @@ public slots:
     void set_massPiston(int massPiston);
     void set_massCrankPin(int massCrankPin);
     void set_massConnectingRod(int massConnectingRod);
+    
+    int get_gasPressure();
+    double get_n();
+    double get_massPiston();
+    double get_massCrankPin();
+    double get_massConnectingRod();
 
     //oblicz wszystko
     void calculate_all();
